@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Raw palette — internal primitives only. Not registered in @theme, so no
+     Tailwind utility (bg-, text-, border-) exists for these; components must
+     go through the semantic layer below. */
+  --palette-deep-green: #172019;
+  --palette-cream: #f5f1e8;
+  --palette-stone: #d8cdbd;
+  --palette-earth: #80684e;
+  --palette-bronze: #a78962;
+  --palette-text: #1b1b1b;
+  --palette-white: #ffffff;
+  --palette-muted: #5b5248;
+
+  /* Semantic tokens — the only layer components reference. */
+  --background: var(--palette-cream);
+  --surface: var(--palette-white);
+  --surface-muted: var(--palette-stone);
+  --foreground: var(--palette-text);
+  --muted-foreground: var(--palette-muted);
+  --accent: var(--palette-bronze);
+  --accent-foreground: var(--palette-deep-green);
+  --border: var(--palette-earth);
+  --dark-section: var(--palette-deep-green);
+  --dark-section-foreground: var(--palette-cream);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-dark-section: var(--dark-section);
+  --color-dark-section-foreground: var(--dark-section-foreground);
+  --font-display: var(--font-heading);
+  --font-body: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Unlayered on purpose: Tailwind utilities live in @layer, so this always
+   wins over a stray focus:outline-none and guarantees a visible ring. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-play-state: paused;
+}
+
+.reveal.is-visible {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-up {
+  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes portrait-fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.portrait-reveal {
+  animation: portrait-fade-scale 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
