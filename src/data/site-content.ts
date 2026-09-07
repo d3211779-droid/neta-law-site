@@ -39,8 +39,10 @@ export type ServicePageContent = {
 export type ContactDetails = {
   phone: string;
   phoneDisplay: string;
+  fax: string;
   email: string;
   address: string;
+  postalCode: string;
 };
 
 export type PageMeta = {
@@ -73,8 +75,8 @@ export const media = {
   logo: {
     src: "/images/logo.png",
     alt: 'עו״ד נטע בן חמו',
-    width: 1254,
-    height: 1254,
+    width: 1325,
+    height: 1187,
   },
   portrait: {
     src: "/images/neta-portrait.jpeg",
@@ -85,13 +87,16 @@ export const media = {
   heroVideo: "/videos/hero.mp4",
 };
 
-// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (no real phone/email/address
-// has been provided yet)
+// Address and postal code are CONFIRMED — client-provided. Phone, fax, and
+// email are still TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (no real
+// values have been provided for those yet).
 export const contactDetails: ContactDetails = {
   phone: "050-000-0000",
   phoneDisplay: "050-000-0000",
+  fax: "מספר הפקס יתעדכן בקרוב",
   email: "office@example.co.il",
-  address: "כתובת המשרד תתעדכן בקרוב",
+  address: 'מתחם "הנגרייה", קיבוץ גת',
+  postalCode: "7956500",
 };
 
 export const nav: NavItem[] = [
@@ -284,31 +289,24 @@ export const contactCallout = {
   cta: { label: "ליצירת קשר", href: "/contact" },
 };
 
-// CONFIRMED biographical facts, woven into TEMPORARY CONTENT — REQUIRES
-// CLIENT APPROVAL prose. Nothing here invents experience, awards, cases,
-// success rates, client names, memberships, or family details beyond what
-// the client supplied. Experience is stated only as "עורכת דין משנת 2012" —
-// not as a number of years — per the client's explicit instruction.
+// CONFIRMED — the client dictated this exact bullet list (not draft prose
+// this time). Nothing here invents experience, awards, cases, success
+// rates, client names, or memberships beyond what was supplied. Experience
+// is stated only as "הוסמכה כעורכת דין בשנת 2012" — not as a number of
+// years — per the client's explicit instruction.
 export const aboutPage = {
   metaTitle: 'אודות | עו"ד נטע בן חמו',
-  metaDescription: 'היכרות עם עו"ד נטע בן חמו — רקע מקצועי, הדרך אל עולם המשפט וגישת העבודה.',
+  metaDescription: 'היכרות עם עו"ד נטע בן חמו — רקע אישי ומקצועי.',
   heading: siteMeta.lawyerFullName,
-  role: "מקרקעין, נחלות, ירושה וגישור",
-  intro: [
-    "נטע בן חמו היא עורכת דין העוסקת במקרקעין, נחלות, ירושה, ייפוי כוח מתמשך וגישור.",
-    "הגישה שלה משלבת ידע וניסיון משפטי עם הקשבה אמיתית ושיחה בגובה העיניים — כך שכל לקוח מרגיש בנוח לשתף ולהבין את התמונה המלאה.",
+  highlights: [
+    "ילידת מושב תימורים, נשואה +4.",
+    "שירתה בחיל מודיעין שדה, הן בשירות סדיר והן בשירות קבע.",
+    "בהמשך סיימה תואר במשפטים (LL.B) בהצטיינות.",
+    "מגשרת מוסמכת.",
+    "הוסמכה כעורכת דין בשנת 2012.",
+    "את דרכה המקצועית החלה בפרקליטות מחוז דרום (אזרחי), ובהמשך עברה לעסוק בתחום במגזר הפרטי.",
+    "לאורך השנים צברה ניסיון בליטיגציה אזרחית, מקרקעין, אגודות שיתופיות, סכסוכים כספיים, צוואות וירושות, ייפוי כוח מתמשך ותביעות מול המוסד לביטוח לאומי.",
   ],
-  pathTitle: "הדרך המקצועית",
-  path: "נטע שירתה בחיל מודיעין שדה, הן בשירות סדיר והן בשירות קבע. בהמשך סיימה תואר במשפטים (LLB) בהצטיינות, ומשמשת כעורכת דין משנת 2012. את דרכה המקצועית החלה בפרקליטות מחוז דרום (אזרחי), ובהמשך עברה לעסוק בתחום במגזר הפרטי. לאורך השנים צברה ניסיון בליטיגציה אזרחית, מקרקעין, אגודות שיתופיות, צוואות וירושות, ייפוי כוח מתמשך ותביעות מול המוסד לביטוח לאומי.",
-  ruralTitle: "מהמרחב הכפרי",
-  rural:
-    "נטע נולדה וגדלה במושב תימורים, ומכירה מקרוב את המרחב הכפרי, את החיים החקלאיים ואת הסוגיות הייחודיות של נחלות ומשקים. היכרות זו היא חלק בלתי נפרד מהאופן שבו היא מלווה היום משפחות וחקלאים בתחום הנחלות.",
-  approachTitle: "גישה משפטית",
-  approach:
-    "נטע מאמינה בליווי משפטי שמתחיל בהקשבה — הבנת האדם והסיפור שמאחורי כל תיק, לצד ניתוח משפטי מעמיק וחשיבה אסטרטגית. הדרך המקצועית משלבת מקצועיות וזמינות, לצד שיחה גלויה וברורה על האפשרויות וההשלכות.",
-  mediationTitle: "גישור ויישוב סכסוכים",
-  mediation:
-    "כחלק מעבודתה, נטע מגשרת ועוסקת ביישוב סכסוכים. כאשר יש לכך מקום, ליווי דרך דיאלוג והקשבה יכול להוביל לפתרון ממוקד וכבוד יותר, תוך שמירה על זכויותיהם וכבודם של כל הצדדים המעורבים.",
   cta: { label: "יצירת קשר", href: "/contact" },
 };
 

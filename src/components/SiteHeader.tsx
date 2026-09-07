@@ -41,12 +41,12 @@ export default function SiteHeader() {
           : "border-b border-transparent bg-transparent text-dark-section-foreground"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 ps-3 pe-4 py-5 sm:ps-4 sm:pe-6">
         <Link href="/" className="shrink-0">
           <Image
             src={media.logo.src}
             alt={media.logo.alt}
-            width={96}
+            width={107}
             height={96}
             className="h-[72px] w-auto lg:h-24"
             quality={90}
@@ -71,15 +71,9 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <a
-            href={`tel:${contactDetails.phone}`}
-            className="hidden text-base font-medium tracking-wide sm:inline"
-          >
-            {contactDetails.phoneDisplay}
-          </a>
           <Link
             href="/contact"
-            className="hidden bg-accent px-5 py-2.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section hover:text-dark-section-foreground sm:inline-flex"
+            className="hidden bg-accent px-5 py-2.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section hover:text-dark-section-foreground lg:inline-flex"
           >
             לתיאום שיחה
           </Link>

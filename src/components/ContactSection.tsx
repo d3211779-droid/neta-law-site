@@ -33,13 +33,16 @@ export default function ContactSection() {
                 {contactDetails.phoneDisplay}
               </a>
             </li>
+            <li className="text-dark-section-foreground/75">פקס: {contactDetails.fax}</li>
             <li>
               <a href={`mailto:${contactDetails.email}`} className="inline-flex items-center gap-3 text-dark-section-foreground/90 hover:text-accent-secondary">
                 <MailIcon />
                 {contactDetails.email}
               </a>
             </li>
-            <li className="text-dark-section-foreground/75">{contactDetails.address}</li>
+            <li className="text-dark-section-foreground/75">
+              {contactDetails.address}, מיקוד {contactDetails.postalCode}
+            </li>
           </ul>
         </div>
 

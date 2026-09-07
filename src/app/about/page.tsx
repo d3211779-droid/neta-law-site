@@ -34,53 +34,15 @@ export default function AboutPage() {
             <h1 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
               {aboutPage.heading}
             </h1>
-            <p className="mt-2 text-base font-medium text-muted-foreground sm:text-lg">
-              {aboutPage.role}
-            </p>
 
-            <div className="mt-8 space-y-4">
-              {aboutPage.intro.map((paragraph) => (
-                <p key={paragraph} className="max-w-xl text-base leading-relaxed text-foreground sm:text-lg">
-                  {paragraph}
-                </p>
+            <ul className="mt-8 space-y-3">
+              {aboutPage.highlights.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-base leading-relaxed text-foreground sm:text-lg">
+                  <span aria-hidden="true" className="mt-3 h-1.5 w-1.5 shrink-0 bg-accent" />
+                  {item}
+                </li>
               ))}
-            </div>
-
-            <div className="mt-10 border-t border-border/40 pt-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-                {aboutPage.pathTitle}
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {aboutPage.path}
-              </p>
-            </div>
-
-            <div className="mt-10 border-t border-border/40 pt-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-                {aboutPage.ruralTitle}
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {aboutPage.rural}
-              </p>
-            </div>
-
-            <div className="mt-10 border-t border-border/40 pt-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-                {aboutPage.approachTitle}
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {aboutPage.approach}
-              </p>
-            </div>
-
-            <div className="mt-10 border-t border-border/40 pt-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-                {aboutPage.mediationTitle}
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {aboutPage.mediation}
-              </p>
-            </div>
+            </ul>
 
             <Link
               href={aboutPage.cta.href}

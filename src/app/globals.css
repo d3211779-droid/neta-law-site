@@ -29,6 +29,12 @@
   --dark-section: var(--palette-charcoal-olive);
   --dark-section-foreground: var(--palette-cream);
 
+  /* A very light, subtle green-tinted page background — derived from the
+     existing accent (olive) mixed into the standard cream background, not a
+     new hue. Used where a page wants gentle separation from the site's
+     default bg-background without introducing a new color. */
+  --surface-tint: color-mix(in srgb, var(--accent) 5%, var(--background));
+
   /* Hero background video framing — isolated here so desktop/mobile crop can
      be retuned later without touching HeroSection.tsx. Source composition:
      Neta on the left, agricultural landscape across the frame, open visual
@@ -54,6 +60,7 @@
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
+  --color-surface-tint: var(--surface-tint);
   --color-foreground: var(--foreground);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
