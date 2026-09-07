@@ -4,26 +4,50 @@
   /* Raw palette — internal primitives only. Not registered in @theme, so no
      Tailwind utility (bg-, text-, border-) exists for these; components must
      go through the semantic layer below. */
-  --palette-deep-green: #172019;
   --palette-cream: #f5f1e8;
-  --palette-stone: #d8cdbd;
-  --palette-earth: #80684e;
+  --palette-surface: #faf7f1;
+  --palette-stone-light: #e6ddd0;
+  --palette-olive: #47542f;
+  --palette-foreground: #1e2419;
+  --palette-muted: #6b6459;
   --palette-bronze: #a78962;
-  --palette-text: #1b1b1b;
+  --palette-stone: #cbbfa9;
+  --palette-charcoal-olive: #172019;
   --palette-white: #ffffff;
-  --palette-muted: #5b5248;
 
   /* Semantic tokens — the only layer components reference. */
   --background: var(--palette-cream);
-  --surface: var(--palette-white);
-  --surface-muted: var(--palette-stone);
-  --foreground: var(--palette-text);
+  --surface: var(--palette-surface);
+  --surface-muted: var(--palette-stone-light);
+  --foreground: var(--palette-foreground);
   --muted-foreground: var(--palette-muted);
-  --accent: var(--palette-bronze);
-  --accent-foreground: var(--palette-deep-green);
-  --border: var(--palette-earth);
-  --dark-section: var(--palette-deep-green);
+  --accent: var(--palette-olive);
+  --accent-foreground: var(--palette-cream);
+  --accent-secondary: var(--palette-bronze);
+  --accent-secondary-foreground: var(--palette-charcoal-olive);
+  --border: var(--palette-stone);
+  --dark-section: var(--palette-charcoal-olive);
   --dark-section-foreground: var(--palette-cream);
+
+  /* Hero background video framing — isolated here so desktop/mobile crop can
+     be retuned later without touching HeroSection.tsx. Source composition:
+     Neta on the left, agricultural landscape across the frame, open visual
+     space toward the right (used for the text overlay on every breakpoint —
+     the video stays visible and looping on mobile too, not swapped out).
+     No frame-preview tool was available while tuning these — treat as a
+     starting point, not a final calibration.
+     Desktop: mild left bias (35%) — most desktop/tablet-landscape widths are
+     wide enough that object-fit: cover crops top/bottom only and shows the
+     full frame width regardless; the bias only matters on narrower
+     landscape widths (e.g. 1024px tablets), where it sacrifices the empty
+     right space before it touches Neta or the fields.
+     Mobile: moderate left bias (28%) — enough to keep Neta's face out of the
+     crop, while still leaving some right-side space for the overlaid text
+     (unlike a hard zoom-to-subject crop, which would lose that space
+     entirely).
+  */
+  --hero-video-position-desktop: 35% 45%;
+  --hero-video-position-mobile: 28% center;
 }
 
 @theme inline {
@@ -34,6 +58,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-secondary-foreground: var(--accent-secondary-foreground);
   --color-border: var(--border);
   --color-dark-section: var(--dark-section);
   --color-dark-section-foreground: var(--dark-section-foreground);
@@ -133,4 +159,37 @@ body {
 
 .portrait-reveal {
   animation: portrait-fade-scale 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Hero background video — object-position isolated per breakpoint so it can
+   be retuned without touching component markup. Applied to both the mobile
+   and desktop <video> elements; only one is ever mounted at a given
+   breakpoint (see HeroSection.tsx), so the media query below is the single
+   place that decides which framing is active. */
+.hero-video {
+  object-position: var(--hero-video-position-mobile);
+}
+
+@media (min-width: 1024px) {
+  .hero-video {
+    object-position: var(--hero-video-position-desktop);
+  }
+}
+
+/* Subtle right-anchored tint for text legibility over the video. Transparent
+   across most of the frame; only the right edge (where the Hero content
+   sits) picks up a soft darkening. Deliberately not a full-frame overlay. */
+.hero-video-overlay {
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--dark-section) 55%, transparent) 0%,
+    color-mix(in srgb, var(--dark-section) 25%, transparent) 30%,
+    transparent 60%
+  );
+}
+
+/* A small, deliberate contrast aid for Hero text sitting directly on the
+   video (no opaque backing) — not a redesign of type color/weight/size. */
+.hero-content {
+  text-shadow: 0 1px 10px color-mix(in srgb, var(--dark-section) 45%, transparent);
 }

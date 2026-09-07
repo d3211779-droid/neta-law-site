@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { contactDetails, contactFieldsOfInterest, contactPage } from "@/data/site-content";
-import { MailIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
+import { MailIcon, PhoneIcon } from "@/components/icons";
 
 const fieldClasses =
   "w-full border-0 border-b border-dark-section-foreground/30 bg-transparent px-0 py-2.5 text-dark-section-foreground placeholder:text-dark-section-foreground/40 focus:border-accent focus:outline-none focus:ring-0";
@@ -28,31 +28,18 @@ export default function ContactSection() {
 
           <ul className="mt-10 space-y-4 text-base">
             <li>
-              <a href={`tel:${contactDetails.phone}`} className="inline-flex items-center gap-3 text-dark-section-foreground/90 hover:text-accent">
+              <a href={`tel:${contactDetails.phone}`} className="inline-flex items-center gap-3 text-dark-section-foreground/90 hover:text-accent-secondary">
                 <PhoneIcon />
                 {contactDetails.phoneDisplay}
               </a>
             </li>
             <li>
-              <a
-                href={`https://wa.me/${contactDetails.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-dark-section-foreground/90 hover:text-accent"
-              >
-                <WhatsappIcon />
-                וואטסאפ
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${contactDetails.email}`} className="inline-flex items-center gap-3 text-dark-section-foreground/90 hover:text-accent">
+              <a href={`mailto:${contactDetails.email}`} className="inline-flex items-center gap-3 text-dark-section-foreground/90 hover:text-accent-secondary">
                 <MailIcon />
                 {contactDetails.email}
               </a>
             </li>
-            {contactDetails.address && (
-              <li className="text-dark-section-foreground/75">{contactDetails.address}</li>
-            )}
+            <li className="text-dark-section-foreground/75">{contactDetails.address}</li>
           </ul>
         </div>
 
@@ -109,14 +96,14 @@ export default function ContactSection() {
 
             <button
               type="submit"
-              className="mt-6 w-full bg-accent px-6 py-3.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section-foreground sm:w-auto"
+              className="mt-6 w-full bg-accent px-6 py-3.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section-foreground hover:text-dark-section sm:w-auto"
             >
               {contactPage.submitLabel}
             </button>
 
             <p className="mt-3 text-base text-dark-section-foreground/70">{contactPage.demoNote}</p>
 
-            <p role="status" aria-live="polite" className="mt-3 text-base font-medium text-accent">
+            <p role="status" aria-live="polite" className="mt-3 text-base font-medium text-accent-secondary">
               {submitted ? contactPage.submittedNote : ""}
             </p>
           </form>

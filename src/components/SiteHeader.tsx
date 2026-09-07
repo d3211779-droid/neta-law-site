@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { contactDetails, nav, practiceAreaHref, practiceAreas, siteMeta } from "@/data/site-content";
+import { contactDetails, media, nav, practiceAreaHref, practiceAreas } from "@/data/site-content";
 import PracticeAreasNav from "@/components/PracticeAreasNav";
 
 export default function SiteHeader() {
@@ -41,11 +42,16 @@ export default function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
-        <Link
-          href="/"
-          className="font-[family-name:var(--font-heading)] text-lg font-semibold sm:text-xl"
-        >
-          {siteMeta.firmName}
+        <Link href="/" className="shrink-0">
+          <Image
+            src={media.logo.src}
+            alt={media.logo.alt}
+            width={96}
+            height={96}
+            className="h-[72px] w-auto lg:h-24"
+            quality={90}
+            priority
+          />
         </Link>
 
         <nav aria-label="ניווט ראשי" className="hidden items-center gap-8 lg:flex">

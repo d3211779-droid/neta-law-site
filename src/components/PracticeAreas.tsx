@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { practiceAreaHref, practiceAreas, practiceAreasHomeTeaser } from "@/data/site-content";
+import {
+  additionalPracticeAreas,
+  practiceAreaHref,
+  practiceAreas,
+  practiceAreasHomeTeaser,
+  practiceAreasPage,
+} from "@/data/site-content";
 import Reveal from "@/components/Reveal";
 
 function PlotMark({ className = "" }: { className?: string }) {
@@ -32,12 +38,16 @@ export function PracticeAreasHomeTeaser() {
         </Reveal>
 
         <Reveal delayMs={100}>
-          <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border/15 pt-8">
+          <ul className="mt-10 flex flex-wrap items-baseline gap-x-10 gap-y-4 border-t border-border/40 pt-8">
             {practiceAreas.map((area) => (
               <li key={area.slug}>
                 <Link
                   href={practiceAreaHref(area.slug)}
-                  className="text-lg font-medium text-foreground underline decoration-border/40 decoration-1 underline-offset-8 transition-colors hover:decoration-accent"
+                  className={
+                    area.featured
+                      ? "text-xl font-semibold text-foreground underline decoration-accent-secondary decoration-2 underline-offset-8 transition-colors hover:decoration-accent"
+                      : "text-lg font-medium text-foreground underline decoration-border decoration-1 underline-offset-8 transition-colors hover:decoration-accent"
+                  }
                 >
                   {area.title}
                 </Link>
@@ -60,35 +70,54 @@ export function PracticeAreasHomeTeaser() {
 
 export function PracticeAreasIndex() {
   return (
-    <div className="border-t border-border/15">
-      {practiceAreas.map((area, index) => (
-        <Reveal key={area.slug} delayMs={Math.min(index * 80, 240)}>
-          <Link
-            href={practiceAreaHref(area.slug)}
-            className="group grid grid-cols-1 items-center gap-4 border-b border-border/15 py-10 transition-colors hover:bg-surface-muted/15 sm:grid-cols-12 sm:gap-6 sm:py-12"
-          >
-            <div className="sm:col-span-1">
-              <PlotMark className="text-border" />
-            </div>
+    <div>
+      <div className="border-t border-border/40">
+        {practiceAreas.map((area, index) => (
+          <Reveal key={area.slug} delayMs={Math.min(index * 80, 240)}>
+            <Link
+              href={practiceAreaHref(area.slug)}
+              className="group grid grid-cols-1 items-center gap-4 border-b border-border/40 py-10 transition-colors hover:bg-surface-muted/25 sm:grid-cols-12 sm:gap-6 sm:py-12"
+            >
+              <div className="sm:col-span-1">
+                <PlotMark className={area.featured ? "text-accent-secondary" : "text-border"} />
+              </div>
 
-            <h3 className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-foreground sm:col-span-4">
-              {area.title}
-            </h3>
+              <h3
+                className={`font-[family-name:var(--font-heading)] font-semibold text-foreground sm:col-span-4 ${
+                  area.featured ? "text-3xl" : "text-2xl"
+                }`}
+              >
+                {area.title}
+              </h3>
 
-            <div className="flex flex-col gap-4 sm:col-span-7">
-              <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {area.shortDescription}
-              </p>
-              <span className="inline-flex items-center gap-2 text-base font-medium text-foreground underline decoration-accent decoration-2 underline-offset-4">
-                לעמוד המלא
-                <span className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
-                  ←
+              <div className="flex flex-col gap-4 sm:col-span-7">
+                <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  {area.shortDescription}
+                </p>
+                <span className="inline-flex items-center gap-2 text-base font-medium text-foreground underline decoration-accent decoration-2 underline-offset-4">
+                  {practiceAreasPage.itemLinkLabel}
+                  <span className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
+                    ←
+                  </span>
                 </span>
-              </span>
-            </div>
-          </Link>
-        </Reveal>
-      ))}
+              </div>
+            </Link>
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal delayMs={280}>
+        <div className="mt-16 border-t border-border/40 pt-8">
+          <h2 className="text-lg font-semibold text-muted-foreground">{practiceAreasPage.additionalHeading}</h2>
+          <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-2">
+            {additionalPracticeAreas.map((area) => (
+              <li key={area.title} className="text-base text-muted-foreground">
+                {area.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
     </div>
   );
 }

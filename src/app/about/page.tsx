@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { aboutPage } from "@/data/site-content";
+import { aboutPage, media } from "@/data/site-content";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
@@ -16,16 +17,16 @@ export default function AboutPage() {
 
         <div className="mt-8 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <div
-              className="aspect-[4/5] w-full border border-border/15 bg-surface-muted/40"
-              role="img"
-              aria-label="מקום שמור לתמונה מקצועית גדולה של עורכת הדין"
-            >
-              <div className="flex h-full w-full items-center justify-center">
-                <span className="px-6 text-center text-base font-medium text-muted-foreground">
-                  {aboutPage.imagePlaceholder}
-                </span>
-              </div>
+            <div className="portrait-reveal relative aspect-[3/4] w-full overflow-hidden">
+              <Image
+                src={media.portrait.src}
+                alt={media.portrait.alt}
+                fill
+                sizes="(min-width: 1024px) 38vw, 100vw"
+                className="object-cover object-[center_10%]"
+                quality={90}
+                priority
+              />
             </div>
           </div>
 
@@ -45,7 +46,25 @@ export default function AboutPage() {
               ))}
             </div>
 
-            <div className="mt-10 border-t border-border/15 pt-8">
+            <div className="mt-10 border-t border-border/40 pt-8">
+              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
+                {aboutPage.pathTitle}
+              </h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {aboutPage.path}
+              </p>
+            </div>
+
+            <div className="mt-10 border-t border-border/40 pt-8">
+              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
+                {aboutPage.ruralTitle}
+              </h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {aboutPage.rural}
+              </p>
+            </div>
+
+            <div className="mt-10 border-t border-border/40 pt-8">
               <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
                 {aboutPage.approachTitle}
               </h2>
@@ -54,20 +73,13 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="mt-10 border-t border-border/15 pt-8">
+            <div className="mt-10 border-t border-border/40 pt-8">
               <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-                {aboutPage.valuesTitle}
+                {aboutPage.mediationTitle}
               </h2>
-              <dl className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-3">
-                {aboutPage.values.map((value) => (
-                  <div key={value.title}>
-                    <dt className="text-base font-semibold text-foreground">{value.title}</dt>
-                    <dd className="mt-1.5 text-base leading-relaxed text-muted-foreground">
-                      {value.description}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {aboutPage.mediation}
+              </p>
             </div>
 
             <Link

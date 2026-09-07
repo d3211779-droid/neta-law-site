@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ServicePageContent } from "@/data/site-content";
-import { legalDisclaimer } from "@/data/site-content";
+import { servicePageDisclaimer } from "@/data/site-content";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function ServicePageTemplate({ content }: { content: ServicePageContent }) {
@@ -48,7 +48,7 @@ export default function ServicePageTemplate({ content }: { content: ServicePageC
           >
             לתיאום שיחה
           </Link>
-          <p className="text-base leading-relaxed text-muted-foreground">{legalDisclaimer}</p>
+          <p className="text-base leading-relaxed text-muted-foreground">{servicePageDisclaimer}</p>
         </div>
       </div>
     </article>

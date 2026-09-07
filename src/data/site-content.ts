@@ -1,10 +1,11 @@
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
-// Every business fact, name, number, and description in this file is a
-// placeholder for the initial template build. Nothing here is legal advice,
-// a confirmed fact, or an approved credential — all of it must be reviewed
-// and replaced by the lawyer before launch. Two verbatim strings are the
-// exception: the contact-form privacy note and the general-information
-// disclaimer, both dictated exactly as given and not placeholders.
+// Two kinds of comment mark content in this file:
+// - "CONFIRMED" — a fact the client gave directly (name, bio, practice areas).
+//   Exact copy/wording built from a confirmed fact may still read as a draft.
+// - "TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL" — draft marketing wording,
+//   invented descriptive copy, or a still-unknown business detail (phone,
+//   email, address). Nothing here is legal advice.
+// The privacy note and the two disclaimer sentences are dictated verbatim
+// and are not placeholders.
 
 export type NavItem = {
   label: string;
@@ -15,6 +16,13 @@ export type PracticeArea = {
   slug: string;
   title: string;
   shortDescription: string;
+  /** Nachalot gets a touch more visual weight — the firm's central focus. */
+  featured?: boolean;
+};
+
+export type AdditionalPracticeArea = {
+  title: string;
+  description: string;
 };
 
 export type ServicePageContent = {
@@ -31,10 +39,8 @@ export type ServicePageContent = {
 export type ContactDetails = {
   phone: string;
   phoneDisplay: string;
-  whatsappNumber: string;
   email: string;
-  /** Only rendered when set — no placeholder office address is invented. */
-  address?: string;
+  address: string;
 };
 
 export type PageMeta = {
@@ -44,24 +50,48 @@ export type PageMeta = {
 
 export type FooterLink = {
   label: string;
-  /** null = page doesn't exist yet; rendered as plain non-navigational text. */
-  href: string | null;
+  href: string;
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// CONFIRMED — client name and title. Exact wordmark styling is presentational
+// and can be adjusted freely.
 export const siteMeta = {
-  firmName: "נטע | משרד עורכי דין",
-  lawyerName: "נטע [שם משפחה]",
-  lawyerRole: "עורכת דין למקרקעין, נחלות והמרחב הכפרי",
+  lawyerFullName: 'עו"ד נטע בן חמו',
+  lawyerName: "נטע בן חמו",
+  wordmark: "נטע בן חמו | עורכת דין",
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// CONFIRMED real client assets. width/height are the source files' true
+// pixel dimensions, passed to next/image to avoid layout shift.
+// logo.png (replaces the original logo.jpeg) is a true RGBA PNG with real
+// alpha transparency — confirmed by decoding it (all four corners sample at
+// alpha 0), not just its extension. No mix-blend-mode is needed for it.
+// heroVideo is not wired up to any component beyond the Hero.
+// portrait is used exclusively on /about (src/app/about/page.tsx) per the
+// client's request — do not add it to the Hero or any other section.
+export const media = {
+  logo: {
+    src: "/images/logo.png",
+    alt: 'עו״ד נטע בן חמו',
+    width: 1254,
+    height: 1254,
+  },
+  portrait: {
+    src: "/images/neta-portrait.jpeg",
+    alt: 'עו״ד נטע בן חמו',
+    width: 1232,
+    height: 1600,
+  },
+  heroVideo: "/videos/hero.mp4",
+};
+
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (no real phone/email/address
+// has been provided yet)
 export const contactDetails: ContactDetails = {
-  phone: "050-0000000",
-  phoneDisplay: "050-0000000",
-  whatsappNumber: "972500000000",
-  email: "info@example.co.il",
-  // address intentionally omitted — none provided yet.
+  phone: "050-000-0000",
+  phoneDisplay: "050-000-0000",
+  email: "office@example.co.il",
+  address: "כתובת המשרד תתעדכן בקרוב",
 };
 
 export const nav: NavItem[] = [
@@ -71,12 +101,24 @@ export const nav: NavItem[] = [
   { label: "יצירת קשר", href: "/contact" },
 ];
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// CONFIRMED — the five practice areas and their order are client-provided.
+// Descriptions are draft, one line each, and may be refined.
 export const practiceAreas: PracticeArea[] = [
   {
     slug: "nachalot",
     title: "נחלות ומשקים חקלאיים",
-    shortDescription: "זכויות, ירושה ובן ממשיך בנחלות ובמשקים חקלאיים.",
+    shortDescription: "זכויות, ירושה, בן ממשיך והעברה בין־דורית בנחלות ובמשקים חקלאיים.",
+    featured: true,
+  },
+  {
+    slug: "wills-inheritance",
+    title: "צוואות וירושות",
+    shortDescription: "עריכת צוואות וליווי בהליכי ירושה בין בני משפחה.",
+  },
+  {
+    slug: "lasting-power-of-attorney",
+    title: "ייפוי כוח מתמשך",
+    shortDescription: "הסדרת ייפוי כוח מתמשך לעתיד, מתוך בחירה ומראש.",
   },
   {
     slug: "real-estate",
@@ -84,14 +126,22 @@ export const practiceAreas: PracticeArea[] = [
     shortDescription: "ליווי בעסקאות מכר, רכישה והסכמים במקרקעין.",
   },
   {
-    slug: "israel-land-authority",
-    title: "רשות מקרקעי ישראל",
-    shortDescription: "החכרות, היוונים ובקשות מול רשות מקרקעי ישראל.",
+    slug: "mediation",
+    title: "גישור ויישוב סכסוכים",
+    shortDescription: "יישוב סכסוכים בדרך של דיאלוג, מתוך הקשבה לשני הצדדים.",
+  },
+];
+
+// CONFIRMED — mentioned quietly on the practice-areas index only, per the
+// client brief. No dedicated pages exist for these yet.
+export const additionalPracticeAreas: AdditionalPracticeArea[] = [
+  {
+    title: "ליטיגציה אזרחית",
+    description: "ייצוג וליווי בהליכים אזרחיים.",
   },
   {
-    slug: "planning-and-building",
-    title: "תכנון ובנייה",
-    shortDescription: "ליווי מול ועדות תכנון ובנייה בהיבטים משפטיים.",
+    title: "תביעות מול המוסד לביטוח לאומי",
+    description: "ליווי בתביעות וערעורים מול המוסד לביטוח לאומי.",
   },
 ];
 
@@ -99,32 +149,56 @@ export function practiceAreaHref(slug: string): string {
   return `/practice-areas/${slug}`;
 }
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (all legal-substance copy is
+// general and drafted for the template; the Nachalot topics below fold in
+// the client's suggested subtopics rather than becoming separate pages)
 export const servicePages: Record<string, ServicePageContent> = {
   nachalot: {
     slug: "nachalot",
     title: "נחלות ומשקים חקלאיים",
-    metaTitle: "נחלות ומשקים חקלאיים | נטע, משרד עורכי דין",
+    metaTitle: 'נחלות ומשקים חקלאיים | עו"ד נטע בן חמו',
     metaDescription:
-      "ליווי משפטי בסוגיות זכויות, ירושה ובן ממשיך בנחלות ובמשקים חקלאיים.",
+      "ליווי משפטי בנחלות ומשקים חקלאיים: בן ממשיך, העברה בין־דורית והורשת משק.",
     intro:
-      "ליווי משפטי בסוגיות זכויות, ירושה ובן ממשיך בנחלות ובמשקים חקלאיים, מתוך הבנה של המורכבות הייחודית של המרחב הכפרי.",
-    topics: [
-      "רישום זכויות בנחלה",
-      "העברת נחלה ובן ממשיך",
-      "ירושה במשק חקלאי",
-      "הסכמים בין יורשים ובני משפחה",
-    ],
+      "ליווי משפטי בסוגיות זכויות, ירושה והעברה בנחלות ובמשקים חקלאיים, מתוך הבנה של המורכבות הייחודית של המרחב הכפרי והחיים החקלאיים.",
+    topics: ["נחלות ומשקים חקלאיים", "בן ממשיך", "העברה בין־דורית", "הורשת משק ונחלה"],
     whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
     whenToConsult:
       "מומלץ לפנות בתחילת תהליך תכנון ההעברה או הירושה, לפני חתימה על מסמכים או הסכמות בין הצדדים.",
   },
+  "wills-inheritance": {
+    slug: "wills-inheritance",
+    title: "צוואות וירושות",
+    metaTitle: 'צוואות וירושות | עו"ד נטע בן חמו',
+    metaDescription: "עריכת צוואות וליווי משפטי בהליכי ירושה.",
+    intro:
+      "עריכת צוואות וליווי בהליכי ירושה, מתוך תשומת לב לנסיבות המשפחתיות והרצון להותיר סדר וּודאות.",
+    topics: ["עריכת צוואה", "ליווי בהליכי ירושה וצו קיום צוואה", "ירושה על פי דין", "הסכמות בין יורשים"],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult: "מומלץ לפנות הן בשלב עריכת הצוואה מראש, והן בכל שלב בהליך הירושה עצמו.",
+  },
+  "lasting-power-of-attorney": {
+    slug: "lasting-power-of-attorney",
+    title: "ייפוי כוח מתמשך",
+    metaTitle: 'ייפוי כוח מתמשך | עו"ד נטע בן חמו',
+    metaDescription: "הסדרת ייפוי כוח מתמשך לניהול ענייני אדם בעתיד.",
+    intro:
+      "ליווי בהסדרת ייפוי כוח מתמשך – כלי משפטי המאפשר לקבוע מראש מי ינהל את ענייניכם האישיים, הרכושיים והרפואיים, אם וכאשר יהיה בכך צורך.",
+    topics: [
+      "עריכת ייפוי כוח מתמשך",
+      "מינוי מיופה כוח לענייני רכוש ואישיים",
+      "מינוי מיופה כוח לענייני בריאות",
+      "עדכון והתאמת המסמך לנסיבות המשפחתיות",
+    ],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult:
+      "ניתן וכדאי להסדיר ייפוי כוח מתמשך מתוך בחירה, בעת שאדם צלול ומסוגל לקבל החלטות בעצמו.",
+  },
   "real-estate": {
     slug: "real-estate",
     title: "עסקאות מקרקעין",
-    metaTitle: "עסקאות מקרקעין | נטע, משרד עורכי דין",
-    metaDescription:
-      "ליווי משפטי בעסקאות מכר, רכישה והסכמים במקרקעין פרטיים ומסחריים.",
+    metaTitle: 'עסקאות מקרקעין | עו"ד נטע בן חמו',
+    metaDescription: "ליווי משפטי בעסקאות מכר, רכישה והסכמים במקרקעין.",
     intro:
       "ליווי משפטי בעסקאות מכר, רכישה והסכמים במקרקעין פרטיים ומסחריים, משלב המשא ומתן ועד לרישום הזכויות.",
     topics: [
@@ -134,140 +208,127 @@ export const servicePages: Record<string, ServicePageContent> = {
       "עסקאות בין קרובים ובין צדדים שלישיים",
     ],
     whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
-    whenToConsult:
-      "מומלץ לפנות לפני חתימה על זיכרון דברים או הסכם, כדי לבחון את הזכויות והתנאים מראש.",
+    whenToConsult: "מומלץ לפנות לפני חתימה על זיכרון דברים או הסכם, כדי לבחון את הזכויות והתנאים מראש.",
   },
-  "israel-land-authority": {
-    slug: "israel-land-authority",
-    title: "רשות מקרקעי ישראל",
-    metaTitle: "רשות מקרקעי ישראל | נטע, משרד עורכי דין",
-    metaDescription:
-      "טיפול מול רשות מקרקעי ישראל בהחכרות, היוונים ובקשות הקשורות לזכויות במקרקעי ישראל.",
+  mediation: {
+    slug: "mediation",
+    title: "גישור ויישוב סכסוכים",
+    metaTitle: 'גישור ויישוב סכסוכים | עו"ד נטע בן חמו',
+    metaDescription: "ליווי ביישוב סכסוכים בדרך של דיאלוג והקשבה, מתוך שמירה על זכויות וכבוד הצדדים.",
     intro:
-      "טיפול מול רשות מקרקעי ישראל בהחכרות, היוונים ובקשות הקשורות לזכויות במקרקעי ישראל.",
+      "לא כל מחלוקת חייבת להסתיים בהתדיינות משפטית ממושכת. ליווי ביישוב סכסוכים מתוך הקשבה לשני הצדדים, תוך שמירה על זכויותיהם וכבודם, ובחתירה לפתרון שניתן לחיות איתו.",
     topics: [
-      "בקשות להיוון זכויות חכירה",
-      "חידוש והארכת חוזי חכירה",
-      "טיפול בפניות ובעררים מול הרשות",
-      "בירור זכויות רישום מול הרשות",
+      "גישור בסכסוכי משפחה ומקרקעין",
+      "גישור בסכסוכים בין שותפים ובני משפחה",
+      "ליווי בתהליך דיאלוג בין הצדדים",
+      "בחינת האפשרות ליישוב סכסוך מחוץ לכותלי בית המשפט",
     ],
-    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsultTitle: "מתי כדאי לשקול גישור",
     whenToConsult:
-      "מומלץ לפנות בכל שלב שבו מתקבלת פנייה מהרשות, או כאשר עולה צורך להסדיר זכויות מולה.",
-  },
-  "planning-and-building": {
-    slug: "planning-and-building",
-    title: "תכנון ובנייה",
-    metaTitle: "תכנון ובנייה | נטע, משרד עורכי דין",
-    metaDescription:
-      "ליווי משפטי מול ועדות תכנון ובנייה בהיבטים הקשורים להיתרים, תכניות ושימושים במקרקעין.",
-    intro:
-      "ליווי משפטי מול ועדות תכנון ובנייה בהיבטים הקשורים להיתרים, תכניות ושימושים במקרקעין.",
-    topics: [
-      "ליווי בהליכי היתר בנייה",
-      "התנגדויות ופניות לוועדות תכנון",
-      "בחינת היבטים משפטיים של תכניות מתאר",
-      "שימושים חורגים והסדרתם",
-    ],
-    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
-    whenToConsult:
-      "מומלץ לפנות בשלב מוקדם של תכנון הבנייה או השימוש בנכס, לפני הגשת בקשות לוועדות.",
+      "גישור יכול להתאים כאשר לצדדים יש עניין משותף בהמשך מערכת היחסים, או כאשר מבקשים להגיע לפתרון מהיר, מכבד ופחות עימותי מהליך משפטי רגיל.",
   },
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
 export const homeMeta: PageMeta = {
-  title: "נטע | משרד עורכי דין - מקרקעין, נחלות והמרחב הכפרי",
-  description:
-    "ליווי משפטי אישי בתחומי מקרקעין, נחלות, רשות מקרקעי ישראל ותכנון ובנייה.",
+  title: 'עו"ד נטע בן חמו | מקרקעין, נחלות וגישור',
+  description: "ליווי משפטי מקצועי ואישי בסוגיות מקרקעין, נחלות, ירושה, תכנון משפחתי ויישוב סכסוכים.",
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (draft marketing copy, per the
+// client brief's own note that these texts "should remain easy to change")
 export const hero = {
-  eyebrow: "משרד עורכי דין למקרקעין, נחלות והמרחב הכפרי",
-  titleLines: ["הקרקע היא נכס.", "הזכויות עליה דורשות דיוק."],
-  subtitle:
-    "ליווי משפטי אישי ומקצועי בסוגיות מקרקעין, נחלות, משקים חקלאיים והסדרת זכויות.",
+  eyebrow: "עו״ד נטע בן חמו | מקרקעין, נחלות וגישור",
+  titleLines: ["אנשים ואדמה."],
+  subtitle: "ליווי משפטי מקצועי ואישי בסוגיות מקרקעין, נחלות, ירושה, תכנון משפחתי ויישוב סכסוכים.",
   primaryCta: { label: "לתיאום שיחה", href: "/contact" },
   secondaryCta: { label: "לתחומי העיסוק", href: "/practice-areas" },
-  portraitPlaceholder: "תמונה מקצועית תתווסף",
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
 export const practiceAreasHomeTeaser = {
   heading: "תחומי עיסוק מרכזיים",
-  intro: "ליווי משפטי מרוכז בעולם המקרקעין, הנחלות והמרחב הכפרי.",
+  intro: "ליווי משפטי בעולם המקרקעין, הנחלות, הירושה וניהול הסכסוכים.",
   viewAll: { label: "לכל תחומי העיסוק", href: "/practice-areas" },
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
 export const practiceAreasPage = {
-  metaTitle: "תחומי עיסוק | נטע, משרד עורכי דין",
-  metaDescription:
-    "סקירת תחומי העיסוק המרכזיים של המשרד: נחלות, מקרקעין, רשות מקרקעי ישראל ותכנון ובנייה.",
+  metaTitle: 'תחומי עיסוק | עו"ד נטע בן חמו',
+  metaDescription: "סקירת תחומי העיסוק של המשרד: נחלות, ירושה, ייפוי כוח מתמשך, מקרקעין וגישור.",
   heading: "תחומי עיסוק",
-  intro: "ליווי משפטי מרוכז בעולם המקרקעין, הנחלות והמרחב הכפרי.",
+  intro: "ליווי משפטי בעולם המקרקעין, הנחלות, הירושה וניהול הסכסוכים.",
   itemLinkLabel: "לעמוד המלא",
+  additionalHeading: "תחומים נוספים",
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
 export const aboutTeaser = {
-  title: "ליווי משפטי שמתחיל בהקשבה",
+  title: "מהמרחב הכפרי אל עולם המשפט",
   paragraph:
-    "כל תיק מתחיל בשיחה של ממש: הבנת הרקע, הצרכים והנסיבות, לפני שלב אחד של עבודה משפטית.",
-  cta: { label: "להיכרות עם המשרד", href: "/about" },
-  imagePlaceholder: "תמונה תתווסף",
+    'עו"ד נטע בן חמו מלווה לקוחות בסוגיות מקרקעין, נחלות, ירושה וגישור, מתוך רקע אישי בעולם הכפרי והקשבה אמיתית לכל תיק.',
+  cta: { label: "להיכרות עם נטע", href: "/about" },
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (concise original copy — not
+// a verbatim copy of the client's philosophy paragraph)
 export const brandStatement = {
-  quote: "בקרקע, בנכס ובמשפחה — לכל החלטה יש משמעות לטווח ארוך.",
+  quote: "מאחורי כל הליך משפטי יש אדם, משפחה וסיפור.",
+  supporting:
+    "ידע וניסיון משפטי הם הבסיס. הקשבה, אמון והבנת המציאות שמאחורי התיק הם חלק בלתי נפרד מהדרך.",
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
 export const contactCallout = {
-  title: "בואו נבחן יחד את הדרך הנכונה להתקדם",
-  cta: { label: "לעמוד יצירת הקשר", href: "/contact" },
+  title: "יש נושא שדורש בחינה משפטית?",
+  cta: { label: "ליצירת קשר", href: "/contact" },
 };
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY
+// CONFIRMED biographical facts, woven into TEMPORARY CONTENT — REQUIRES
+// CLIENT APPROVAL prose. Nothing here invents experience, awards, cases,
+// success rates, client names, memberships, or family details beyond what
+// the client supplied. Experience is stated only as "עורכת דין משנת 2012" —
+// not as a number of years — per the client's explicit instruction.
 export const aboutPage = {
-  metaTitle: "אודות | נטע, משרד עורכי דין",
-  metaDescription: "היכרות עם המשרד, גישת העבודה והערכים המרכזיים.",
-  heading: siteMeta.lawyerName,
-  role: siteMeta.lawyerRole,
+  metaTitle: 'אודות | עו"ד נטע בן חמו',
+  metaDescription: 'היכרות עם עו"ד נטע בן חמו — רקע מקצועי, הדרך אל עולם המשפט וגישת העבודה.',
+  heading: siteMeta.lawyerFullName,
+  role: "מקרקעין, נחלות, ירושה וגישור",
   intro: [
-    "כל תיק מתחיל בשיחה של ממש: הבנת הרקע, הצרכים והנסיבות, לפני שלב אחד של עבודה משפטית.",
-    "מכאן ואילך הליווי נשאר אישי וברור — הסבר מלא של האפשרויות וההשלכות, בכל שלב בתהליך.",
+    "נטע בן חמו היא עורכת דין העוסקת במקרקעין, נחלות, ירושה, ייפוי כוח מתמשך וגישור.",
+    "הגישה שלה משלבת ידע וניסיון משפטי עם הקשבה אמיתית ושיחה בגובה העיניים — כך שכל לקוח מרגיש בנוח לשתף ולהבין את התמונה המלאה.",
   ],
-  approachTitle: "גישת העבודה",
+  pathTitle: "הדרך המקצועית",
+  path: "נטע שירתה בחיל מודיעין שדה, הן בשירות סדיר והן בשירות קבע. בהמשך סיימה תואר במשפטים (LLB) בהצטיינות, ומשמשת כעורכת דין משנת 2012. את דרכה המקצועית החלה בפרקליטות מחוז דרום (אזרחי), ובהמשך עברה לעסוק בתחום במגזר הפרטי. לאורך השנים צברה ניסיון בליטיגציה אזרחית, מקרקעין, אגודות שיתופיות, צוואות וירושות, ייפוי כוח מתמשך ותביעות מול המוסד לביטוח לאומי.",
+  ruralTitle: "מהמרחב הכפרי",
+  rural:
+    "נטע נולדה וגדלה במושב תימורים, ומכירה מקרוב את המרחב הכפרי, את החיים החקלאיים ואת הסוגיות הייחודיות של נחלות ומשקים. היכרות זו היא חלק בלתי נפרד מהאופן שבו היא מלווה היום משפחות וחקלאים בתחום הנחלות.",
+  approachTitle: "גישה משפטית",
   approach:
-    "כל תיק נבחן לעומק לפני שממליצים על דרך פעולה, מתוך הקשבה לנסיבות הספציפיות של כל לקוח ולקוחה.",
-  valuesTitle: "ערכים מרכזיים",
-  values: [
-    { title: "מקצועיות", description: "עבודה יסודית ומדויקת, המבוססת על הכרת התחום לעומק." },
-    { title: "שקיפות", description: "הסבר ברור של התהליך, האפשרויות וההשלכות בכל שלב." },
-    { title: "ליווי אישי", description: "זמינות ותשומת לב אישית לכל לקוח ולנסיבות הייחודיות שלו." },
-  ],
-  imagePlaceholder: "תמונה מקצועית תתווסף",
+    "נטע מאמינה בליווי משפטי שמתחיל בהקשבה — הבנת האדם והסיפור שמאחורי כל תיק, לצד ניתוח משפטי מעמיק וחשיבה אסטרטגית. הדרך המקצועית משלבת מקצועיות וזמינות, לצד שיחה גלויה וברורה על האפשרויות וההשלכות.",
+  mediationTitle: "גישור ויישוב סכסוכים",
+  mediation:
+    "כחלק מעבודתה, נטע מגשרת ועוסקת ביישוב סכסוכים. כאשר יש לכך מקום, ליווי דרך דיאלוג והקשבה יכול להוביל לפתרון ממוקד וכבוד יותר, תוך שמירה על זכויותיהם וכבודם של כל הצדדים המעורבים.",
   cta: { label: "יצירת קשר", href: "/contact" },
 };
 
+// CONFIRMED — matches the five main practice areas.
 export const contactFieldsOfInterest = [
   "נחלות ומשקים חקלאיים",
+  "צוואות וירושות",
+  "ייפוי כוח מתמשך",
   "עסקאות מקרקעין",
-  "רשות מקרקעי ישראל",
-  "תכנון ובנייה",
+  "גישור ויישוב סכסוכים",
   "אחר",
 ];
 
-// TEMPORARY CONTENT — REPLACE AFTER CLIENT DISCOVERY (except the two
-// verbatim notes below, which are dictated copy, not placeholders).
+// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (except the privacy note,
+// which is dictated verbatim)
 export const contactPage = {
-  metaTitle: "יצירת קשר | נטע, משרד עורכי דין",
+  metaTitle: 'יצירת קשר | עו"ד נטע בן חמו',
   metaDescription: "פרטי התקשרות וטופס יצירת קשר להדגמה בלבד.",
-  title: "בואו נבחן יחד את הדרך הנכונה להתקדם",
-  subtitle: "השאירו פרטים ונחזור אליכם לתיאום שיחת היכרות ראשונית.",
+  title: "יצירת קשר",
+  subtitle: "יש נושא שדורש בחינה משפטית? השאירו פרטים ונחזור אליכם לתיאום שיחת היכרות ראשונית.",
   privacyNote:
     "נא לא למסור בטופס מידע משפטי, אישי או רגיש. השארת פרטים אינה יוצרת יחסי עורך דין–לקוח.",
   demoNote: "טופס זה במצב הדגמה בלבד ואינו שולח מידע לשרת.",
@@ -275,12 +336,17 @@ export const contactPage = {
   submittedNote: "תודה! זוהי הדגמה בלבד ולא נשלח מידע.",
 };
 
+// Only routes that actually exist — no privacy/accessibility links until
+// those pages are built.
 export const footerLinks: FooterLink[] = [
-  { label: "מדיניות פרטיות", href: null },
-  { label: "הצהרת נגישות", href: null },
+  { label: "אודות", href: "/about" },
+  { label: "תחומי עיסוק", href: "/practice-areas" },
   { label: "יצירת קשר", href: "/contact" },
 ];
 
 // Dictated verbatim — not a placeholder.
-export const legalDisclaimer =
-  "המידע באתר הוא מידע כללי בלבד ואינו מהווה ייעוץ משפטי.";
+export const legalDisclaimer = "המידע באתר הוא מידע כללי בלבד ואינו מהווה ייעוץ משפטי.";
+
+// Dictated verbatim — not a placeholder. Used on service pages specifically.
+export const servicePageDisclaimer =
+  "המידע בעמוד הוא מידע כללי בלבד ואינו מהווה ייעוץ משפטי. כל מקרה נבחן בהתאם לנסיבותיו.";

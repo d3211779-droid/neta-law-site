@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { contactCallout, contactDetails } from "@/data/site-content";
-import { PhoneIcon, WhatsappIcon } from "@/components/icons";
+import { PhoneIcon } from "@/components/icons";
 import Reveal from "@/components/Reveal";
 
 export default function ContactCallout() {
@@ -12,31 +12,22 @@ export default function ContactCallout() {
             {contactCallout.title}
           </h2>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4">
             <a
               href={`tel:${contactDetails.phone}`}
-              className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section-foreground"
+              className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section-foreground hover:text-dark-section"
             >
               <PhoneIcon />
               {contactDetails.phoneDisplay}
             </a>
-            <a
-              href={`https://wa.me/${contactDetails.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-dark-section-foreground/30 px-6 py-3 text-base font-semibold text-dark-section-foreground transition-colors hover:bg-dark-section-foreground/10"
-            >
-              <WhatsappIcon />
-              וואטסאפ
-            </a>
-          </div>
 
-          <Link
-            href={contactCallout.cta.href}
-            className="mt-6 inline-flex items-center gap-2 text-base font-medium text-dark-section-foreground/80 underline decoration-accent decoration-2 underline-offset-4 hover:text-dark-section-foreground"
-          >
-            {contactCallout.cta.label}
-          </Link>
+            <Link
+              href={contactCallout.cta.href}
+              className="inline-flex items-center gap-2 text-base font-medium text-dark-section-foreground/80 underline decoration-accent-secondary decoration-2 underline-offset-4 hover:text-dark-section-foreground"
+            >
+              {contactCallout.cta.label}
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>

@@ -1,15 +1,17 @@
 ---
-name: נטע | משרד עורכי דין
-description: Boutique real-estate and land-law practice site — Hebrew, RTL, editorial and personal, not a generic law-firm template.
+name: עו"ד נטע בן חמו
+description: Boutique rural legal practice — Hebrew, RTL, elegant-not-rustic, warm-not-corporate, professional-not-agricultural.
 colors:
-  deep-green: "#172019"
   cream: "#F5F1E8"
-  stone: "#D8CDBD"
-  earth: "#80684E"
+  surface: "#FAF7F1"
+  stone-light: "#E6DDD0"
+  olive: "#47542F"
+  foreground: "#1E2419"
+  muted: "#6B6459"
   bronze: "#A78962"
-  text: "#1B1B1B"
+  stone: "#CBBFA9"
+  charcoal-olive: "#172019"
   white: "#FFFFFF"
-  muted: "#5B5248"
 typography:
   display:
     fontFamily: "Frank Ruhl Libre, Georgia, serif"
@@ -43,55 +45,57 @@ spacing:
   xl: "112px"
 components:
   button-primary:
-    backgroundColor: "{colors.bronze}"
-    textColor: "{colors.deep-green}"
+    backgroundColor: "{colors.olive}"
+    textColor: "{colors.cream}"
     rounded: "{rounded.none}"
     padding: "14px 32px"
   button-primary-hover:
-    backgroundColor: "{colors.deep-green}"
+    backgroundColor: "{colors.charcoal-olive}"
     textColor: "{colors.cream}"
 ---
 
-# Design System: נטע | משרד עורכי דין
+# Design System: עו"ד נטע בן חמו
 
 ## Overview
 
-**Creative North Star: "The Land Registrar's Ledger"** — the quiet authority of a cadastral map and a bound legal ledger, not a real-estate brochure.
+**Creative North Star: "The Land Registrar's Ledger"** — the quiet authority of a cadastral map and a bound legal ledger, elegant rather than rustic, warm rather than corporate, professional rather than agricultural.
 
-The site reads as a personal, boutique practice across eight pages (home, about, a practice-areas index, four dedicated service pages, contact), not a firm brochure: one voice, one large portrait, very little copy per screen, huge editorial type, asymmetric composition with generous breathing room. Land enters only as abstract graphic memory — thin contour and parcel-boundary linework — never as literal crop, soil, or nature photography, and never as farmland branding. Confirmed rejections: hammer/scales/courthouse-column/marble legal clichés, a generic heavy-shadow card grid, sequential numbering (01/02/03/04) anywhere in the practice-area presentation, and a farmland-agriculture register.
+The site is a personal, boutique rural-legal practice across nine pages (home, about, a practice-areas index, five dedicated service pages, contact), not a firm brochure: one voice, one large portrait, very little copy per screen, huge editorial type, asymmetric composition with generous breathing room. Land enters only as abstract graphic memory — aerial parcel shapes, thin cadastral/plot-boundary linework, topographic-style lines — never as literal crop, soil, or nature photography, and never as farmland branding. Confirmed rejections: hammer/scales/courthouse-column/marble legal clichés, generic law-stock imagery, tractors/hay/leaves-everywhere/excessive green, a heavy-shadow crowded-card layout, sequential numbering (01/02/03...) anywhere in the practice-area presentation.
 
 **Key Characteristics:**
 - Asymmetric, editorial composition with large serif display type and long negative space.
-- Land/parcel motifs rendered as thin-line abstract graphics, never photography, never numbered.
+- Land/parcel motifs rendered as thin-line abstract graphics (contour + cadastral linework), never photography, never numbered.
 - Flat surfaces — depth comes from color fields, hairlines, and scale, not shadows.
-- The lawyer is the subject; a reserved portrait slot swaps in a real cutout photo with zero layout change.
+- The lawyer is the subject; a reserved portrait slot swaps in a real photo of her with zero layout change and no broken-image reference in the meantime.
 - Every color is consumed through a semantic token layer — no component references a raw palette value directly.
 
 ## Colors
 
-Warm, low-saturation, ledger-like: deep green and near-black text for authority, cream and stone for paper-like grounds, earth for structural hairlines/land linework, one bronze accent reserved for interaction.
+Warm, low-saturation, ledger-like: an ivory/cream ground family (background/surface/surface-muted), a deep-olive accent that reads as authority rather than "excessive green," a muted bronze/earth secondary reserved for the land motif, near-black-olive text.
 
-Raw palette values live only as CSS custom-property primitives in `globals.css`; they are **not** registered as Tailwind theme colors, so no `bg-deep-green`/`text-bronze`-style utility exists. Components consume the semantic layer only:
+Raw palette values live only as CSS custom-property primitives in `globals.css`; they are **not** registered as Tailwind theme colors, so no `bg-olive`/`text-bronze`-style utility exists. Components consume the semantic layer only:
 
 | Semantic token | Value | Role |
 |---|---|---|
-| `background` | cream #F5F1E8 | default page background |
-| `surface` | white #FFFFFF | header-on-scroll, dropdown panel — chrome that should feel a touch crisper than the page |
-| `surface-muted` | stone #D8CDBD | warm textured panels (image placeholders, hover wash) |
-| `foreground` | text #1B1B1B | default text and headings on light grounds |
-| `muted-foreground` | muted #5B5248 | secondary/de-emphasized text on light grounds (~7:1 on cream) |
-| `accent` | bronze #A78962 | the one interactive color — buttons, focus rings, link underlines |
-| `accent-foreground` | deep-green #172019 | text/icons placed on top of accent-colored surfaces |
-| `border` | earth #80684E | hairlines, dividers, and all land/parcel decorative linework (used at low opacity) |
-| `dark-section` | deep-green #172019 | background for dark bands (Hero, Contact, footer-adjacent CTA) |
-| `dark-section-foreground` | cream #F5F1E8 | text/icons on dark-section backgrounds |
+| `background` | warm ivory #F5F1E8 | default page background |
+| `surface` | slightly lighter warm neutral #FAF7F1 | header-on-scroll, dropdown panel — chrome a touch crisper than the page |
+| `surface-muted` | light stone #E6DDD0 | warm textured panels (image placeholders, hover wash) |
+| `foreground` | near-black olive #1E2419 | default text and headings on light grounds |
+| `muted-foreground` | warm grey #6B6459 | secondary/de-emphasized text on light grounds (~5.2:1 on cream) |
+| `accent` | deep olive #47542F | the primary interactive color — buttons, links, focus rings. Passes ~7.3:1 on cream, so unlike a pure accent it is also safe as body/link text |
+| `accent-foreground` | cream #F5F1E8 | text/icons on top of `accent`-colored surfaces |
+| `accent-secondary` | muted bronze/earth #A78962 | the land motif — cadastral/parcel linework, dividers on dark grounds, Nachalot's featured mark. Not safe as text on light grounds (~2.9:1) |
+| `accent-secondary-foreground` | charcoal-olive #172019 | text on top of rare `accent-secondary`-colored surfaces |
+| `border` | subtle warm stone #CBBFA9 | plain UI hairlines/dividers (used at low opacity) — distinct from the earth-toned land linework |
+| `dark-section` | deep forest/charcoal olive #172019 | background for dark bands (Hero, Contact, homepage close) |
+| `dark-section-foreground` | cream #F5F1E8 | text/icons on `dark-section` backgrounds |
 
 ### Named Rules
-**The One-Accent Rule.** Bronze (`accent`) is the only saturated, interactive color in the system. Earth (`border`) carries the land/structural motif instead of doubling as a second accent — if a new element wants a second accent hue, it is wrong, not the rule.
+**The Two-Accent Rule.** `accent` (olive) carries interaction; `accent-secondary` (bronze/earth) carries the land motif and rare dark-ground decoration. Neither substitutes for the other, and nothing else in the system is saturated.
 
-**The Bronze-on-Dark Rule.** Bronze only passes 4.5:1 text contrast against `dark-section` (deep green, ~5.4:1 measured). Against `background`/`surface-muted` (cream/stone) it measures ~2.9:1 and fails even the 3:1 large-text floor. On light grounds, `accent` stays a background (buttons), a decorative underline/divider color, or a non-text graphic accent — never body or link text; `foreground` carries that text color instead.
+**The Accent-Secondary-on-Dark Rule.** Bronze/earth only passes 4.5:1 text contrast against `dark-section` (~5.4:1 measured). Against `background`/`surface-muted` it measures ~2.9:1 and fails even the 3:1 large-text floor — it stays a background, a decorative underline/divider, or a non-text graphic accent on light grounds; `accent` or `foreground` carries text there instead.
 
-**The No-Numbers Rule.** Practice areas never carry a sequence number (no 01/02/03/04, no bullet ordinals). Where last iteration used a numeral as the signature mark, this iteration uses a small quiet line-glyph (`PlotMark`) or nothing at all — order is implied by document order only.
+**The No-Numbers Rule.** Practice areas never carry a sequence number (no 01/02/03..., no bullet ordinals). The signature mark is a small quiet line-glyph (`PlotMark`) or nothing at all — order is document order only.
 
 ## Typography
 
@@ -103,67 +107,65 @@ Raw palette values live only as CSS custom-property primitives in `globals.css`;
 ### Hierarchy
 - **Display** (600, `clamp(2.5rem, 5vw + 1rem, 4.5rem)`, 1.08 line-height): the Hero headline only.
 - **Headline** (600, `clamp(1.75rem, 2.5vw + 1rem, 2.75rem)`, 1.15): page/section H1s and H2s.
-- **Title** (600, 1.25rem–1.5rem): sub-section titles (approach, values, "when to consult").
-- **Body** (400, 1rem/16px floor, 1.7 line-height, 60–72ch measure): paragraphs. 16px is the site-wide floor — no in-body text renders smaller, including labels, nav, and footer copy.
+- **Title** (600, 1.25rem–1.5rem): sub-section titles (professional path, rural connection, approach, mediation, "when to consult").
+- **Body** (400, 1rem/16px floor, 1.7 line-height, 60–72ch measure, never centered for long paragraphs): body copy.
 - **Label** (500, 1rem, 0.04em tracking): the Hero eyebrow and form field labels. Not repeated as a kicker over every section.
 
 ### Named Rules
-**The Single-Eyebrow Rule.** The tracked label/eyebrow treatment appears once, in the Hero. Repeating it above every section turns a voice into a template.
+**The Single-Eyebrow Rule.** The tracked label/eyebrow treatment appears once, in the Hero.
 
-**The 16px Floor Rule.** Nothing in the rendered page body — including footer fine print — goes below `text-base` (16px). Legibility outranks visual quietness for small print.
+**The 16px Floor Rule.** Nothing in the rendered page body — including footer fine print — goes below `text-base` (16px).
 
 ## Layout
 
-Container max-width 72rem (`max-w-6xl`), with asymmetric internal splits (e.g. Hero ~55/45, About ~5/7) rather than centered 50/50 grids. Breakpoints: 375 (mobile baseline, single column, image follows text), 768 (tablet), 1024 (desktop two-column layouts activate), 1440 (max content width holds, extra space becomes margin). Spacing rhythm uses the `sm/md/lg/xl` scale (16/32/64/112px); more space above a heading than below it. No horizontal scroll at any breakpoint. The header is `fixed`; every non-home page reserves `pt-28`/`pt-32` (mobile/desktop) at its top so content clears it — only the Hero is allowed to sit flush at `y=0` under the transparent header.
+Container max-width 72rem (`max-w-6xl`), with asymmetric internal splits (Hero ~55/45, About ~5/7) rather than centered 50/50 grids. Breakpoints: 375 (mobile baseline, single column, image follows text), 768, 1024 (desktop two-column layouts activate), 1440 (max content width holds, extra space becomes margin). Spacing rhythm uses the `sm/md/lg/xl` scale (16/32/64/112px), tuned per breakpoint rather than uniformly stacked — mobile spacing compresses intentionally, it doesn't just inherit desktop gaps. No horizontal scroll at any breakpoint. The header is `fixed`; every non-home page reserves `pt-28`/`pt-32` at its top — only the Hero sits flush at `y=0` under the transparent header.
 
 ## Elevation & Depth
 
-Flat by design — no drop shadows anywhere. Depth and separation come from color-field changes (`dark-section` vs. `background` vs. `surface-muted` bands), 1px hairline rules, and generous whitespace, never from `box-shadow`.
+Flat by design — no drop shadows anywhere. Depth comes from color-field changes (`dark-section` vs. `background` vs. `surface-muted`), 1px hairlines, and whitespace.
 
 ### Named Rules
-**The Flat Ledger Rule.** If a component reaches for a shadow to separate itself from the page, it is using the wrong tool; use a hairline or a color-field change instead.
+**The Flat Ledger Rule.** A component reaching for a shadow to separate itself from the page is using the wrong tool; use a hairline or a color-field change instead.
 
 ## Shapes
 
-Sharp-to-barely-rounded: `rounded.none` (0px) is the default for buttons, images, and section dividers; `rounded.sm` (2px) only where a hard corner would look like an error; `rounded.md` (6px) is the ceiling, reserved for form inputs. Borders are 1px hairlines in `border` (earth) at low opacity; no colored `border-left`/`border-right` accents thicker than 1px.
+Sharp-to-barely-rounded, matching the brief's explicit rejection of excessive rounding: `rounded.none` (0px) is default for buttons, images, and dividers; `rounded.sm`/`rounded.md` exist only for form inputs where a hard corner reads as an error. Borders are 1px hairlines in `border` (stone) for plain UI structure, or `accent-secondary` (bronze/earth) specifically for land-motif linework.
 
 ## Components
 
 ### Buttons
-- **Shape:** 0px radius, 1px hairline only on the ghost/secondary variant.
-- **Primary:** `bg-accent`/`text-accent-foreground`, 14px/32px padding, no shadow.
-- **Hover/Focus:** primary inverts to `bg-dark-section`/`text-dark-section-foreground` (or the cream equivalent on a dark surface); focus-visible gets a 2px `accent`-colored outline with offset, guaranteed globally via an unlayered `:focus-visible` rule.
+- **Primary:** `bg-accent`/`text-accent-foreground`, 14px/32px padding, no shadow, 0px radius.
+- **Hover/Focus:** inverts to `bg-dark-section`/`text-dark-section-foreground` (or the cream/charcoal equivalent on an already-dark surface); focus-visible gets a 2px `accent`-colored outline, guaranteed globally via an unlayered `:focus-visible` rule.
 - **Secondary/Ghost:** transparent background, 1px `foreground`-colored hairline border, inverts to `bg-foreground`/`text-background` on hover.
 
 ### Cards / Containers
-This system deliberately has no card component — practice areas are editorial rows/lists, not cards, per the brief's own rejection of a card grid.
+No card component — practice areas are editorial rows/lists, per the brief's explicit rejection of crowded cards.
 
 ### Inputs / Fields
-- **Style:** transparent background, bottom-hairline only (no boxed border), theme-appropriate foreground text color.
-- **Focus:** hairline switches to solid `accent`, plus the global `:focus-visible` ring.
-- **Error/Disabled:** not yet applicable (demo form has no server validation).
+Transparent background, bottom-hairline only; focus hairline switches to `accent` plus the global `:focus-visible` ring.
 
 ### Navigation
-- **Header:** `fixed`, transparent over the Hero on the home page only (cream wordmark/links on the dark Hero), switches to a `surface` background with `foreground` text and a 1px `border` hairline once scrolled — and is always in that opaque state on every non-home page (they have no dark hero to sit over). Active/hover underlines in `accent`.
-- **Practice-areas dropdown:** a disclosure pattern (`button[aria-expanded][aria-controls]` + a plain link list, not `role=menu`) — opens on click, closes on Escape/outside-click/focus-leave, always renders on an opaque `surface` panel regardless of header state. Mobile folds the same four links directly into the main mobile panel instead of nesting a second dropdown.
+- **Header:** `fixed`, transparent over the Hero on the home page only, switches to a `surface` background with `foreground` text and a 1px `border` hairline once scrolled — always opaque on every non-home page.
+- **Practice-areas dropdown:** a disclosure pattern (`button[aria-expanded][aria-controls]` + a plain link list) — opens on click (not hover-only), closes on Escape/outside-click/focus-leave, always renders on an opaque `surface` panel. Mobile folds the same five links directly into the main mobile panel.
 
 ### Signature Component: Practice-Area Row (index) / Teaser (home)
-No numerals anywhere. The home teaser is a single quiet block: heading + one-line intro + a plain wrapped list of the four area names (each a text link) + one "view all" link. The `/practice-areas` index is a full-width row per area (not a card): a small `PlotMark` line-glyph, title, one-line description, and a "לעמוד המלא" link, separated from the next row by a single 1px hairline. No background fill, no border box, no shadow, no ordinal.
+No numerals. The home teaser is a quiet block: heading + one-line intro + a plain wrapped list of the five area names (Nachalot rendered one step larger/bolder with a bronze underline as its "slightly stronger" emphasis, per the brief) + one "view all" link. The `/practice-areas` index is a full-width row per area: a small `PlotMark` glyph (bronze for Nachalot, stone for the rest), title, one-line description, and a "לעמוד המלא" link — followed by a visually quiet "תחומים נוספים" text-only list (civil litigation, National Insurance claims) with no page, no link, no visual weight competing with the five main areas.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep land/parcel motifs as thin-line abstract graphics (contour lines, parcel-boundary linework) in `border` color.
-- **Do** reserve the Hero portrait as an exact-size slot so a real transparent photo drops in without touching layout.
-- **Do** keep bronze (`accent`) as the only saturated, interactive color across the whole site.
-- **Do** keep sections flat — hairlines and color fields carry separation, never shadows.
-- **Do** route every color through the semantic token layer (`background`/`surface`/`foreground`/`accent`/`border`/`dark-section`, etc.) — never a raw hex or a raw-palette utility class.
+- **Do** keep land/parcel motifs as thin-line abstract graphics (aerial parcel shapes, cadastral/plot-boundary linework, topographic-style lines) in `accent-secondary`.
+- **Do** reserve the Hero portrait as an exact-size slot so a real photo drops in without touching layout or ever rendering a broken image reference.
+- **Do** give Nachalot a touch more visual weight (size/underline color) without making the other four areas look unimportant.
+- **Do** route every color through the semantic token layer.
+- **Do** keep experience stated as "עורכת דין משנת 2012" — never as a number of years — until the client confirms otherwise.
 
 ### Don't:
-- **Don't** use a hammer, scales, courthouse columns, marble texture, or any stock legal-photo cliché.
-- **Don't** number practice areas (no 01/02/03/04) anywhere on the site.
+- **Don't** use a hammer, scales, courthouse columns, marble texture, generic law-stock imagery, tractors, hay, or leaves-everywhere.
+- **Don't** number practice areas anywhere on the site.
 - **Don't** build practice areas as a same-size icon+heading+text card grid.
-- **Don't** render land as literal crop/soil/nature photography or lean the site toward an agriculture/farm brand.
-- **Don't** invent years of experience, degrees, credentials, case results, or testimonials.
-- **Don't** repeat the Hero's tracked eyebrow label above every subsequent section.
-- **Don't** link the footer to a page that doesn't exist yet — privacy/accessibility render as plain non-navigational text until those pages are built.
+- **Don't** make the site read as a farm/agriculture business — land stays abstract and supporting, never the literal subject.
+- **Don't** invent years of experience, awards, cases, success rates, client names, professional memberships, or biographical details beyond what the client supplied.
+- **Don't** make WhatsApp a homepage or contact-page CTA — the client's confirmed priority order is website form, then telephone.
+- **Don't** artificially stuff the firm's geographic focus areas (באר טוביה, יואב, מטה יהודה, לכיש, חוף אשקלון, גזר) into the homepage — reserved for later, approved SEO content.
+- **Don't** link the footer to a page that doesn't exist yet — privacy/accessibility links are omitted entirely, not shown disabled.
