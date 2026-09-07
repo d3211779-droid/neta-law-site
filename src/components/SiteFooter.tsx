@@ -23,7 +23,24 @@ export default function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-6 text-base text-muted-foreground">{contactDetails.phoneDisplay} · {contactDetails.email}</p>
+        <div className="mt-6 space-y-1.5 text-base text-muted-foreground">
+          <p>
+            טלפון:{" "}
+            <a href={`tel:${contactDetails.phone}`} className="hover:text-foreground">
+              {contactDetails.phoneDisplay}
+            </a>
+          </p>
+          <p>פקס: {contactDetails.fax}</p>
+          <p>
+            דוא&quot;ל:{" "}
+            <a href={`mailto:${contactDetails.email}`} className="hover:text-foreground">
+              {contactDetails.email}
+            </a>
+          </p>
+          <p>
+            {contactDetails.address} | מיקוד {contactDetails.postalCode}
+          </p>
+        </div>
 
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">{legalDisclaimer}</p>
 

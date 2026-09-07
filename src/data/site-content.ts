@@ -90,14 +90,12 @@ export const media = {
   heroVideo: "/videos/hero.mp4",
 };
 
-// Address and postal code are CONFIRMED — client-provided. Phone, fax, and
-// email are still TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (no real
-// values have been provided for those yet).
+// CONFIRMED — real client-provided contact details.
 export const contactDetails: ContactDetails = {
-  phone: "050-000-0000",
-  phoneDisplay: "050-000-0000",
-  fax: "מספר הפקס יתעדכן בקרוב",
-  email: "office@example.co.il",
+  phone: "050-7239180",
+  phoneDisplay: "050-7239180",
+  fax: "077-4449625",
+  email: "nettabhlaw@gmail.com",
   address: 'מתחם "הנגרייה", קיבוץ גת',
   postalCode: "7956500",
 };

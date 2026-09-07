@@ -17,7 +17,7 @@ export default function ContactSection() {
 
   return (
     <section className="bg-dark-section text-dark-section-foreground">
-      <div className="mx-auto flex max-w-6xl flex-col gap-14 px-4 pb-20 pt-28 sm:px-6 sm:pb-28 sm:pt-32 lg:flex-row lg:gap-16">
+      <div className="mx-auto flex max-w-6xl flex-col gap-14 px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:flex-row lg:gap-16 lg:pt-40">
         <div className="lg:w-5/12">
           <h1 className="max-w-sm font-[family-name:var(--font-heading)] text-3xl font-semibold sm:text-4xl">
             {contactPage.title}
