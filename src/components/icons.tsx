@@ -28,6 +28,22 @@ export function WhatsappIcon() {
   );
 }
 
+export function AccessibilityIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9.25" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="12" cy="7.6" r="1.6" fill="currentColor" />
+      <path
+        d="M6.8 10.4c1.6.75 3.4 1.1 5.2 1.1s3.6-.35 5.2-1.1M12 11.5v3.3M9.4 18.4l1.4-4.3h2.4l1.4 4.3"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function MailIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">

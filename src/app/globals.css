@@ -200,3 +200,65 @@ body {
 .hero-content {
   text-shadow: 0 1px 10px color-mix(in srgb, var(--dark-section) 45%, transparent);
 }
+
+/* ============================================================
+   ACCESSIBILITY WIDGET — user-controlled overrides.
+   Set/removed on <html> by AccessibilityWidget.tsx (and mirrored by the
+   inline bootstrap script in layout.tsx so they apply before hydration).
+   ============================================================ */
+
+/* High contrast: because every component already consumes the semantic
+   token layer below (never a raw palette value), overriding these
+   variables re-themes the entire site automatically — no component file
+   needs to change for this mode to work everywhere. */
+html[data-a11y-contrast="high"] {
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #e0e0e0;
+  --foreground: #000000;
+  --muted-foreground: #1a1a1a;
+  --accent: #123a1c;
+  --accent-foreground: #ffffff;
+  --accent-secondary: #123a1c;
+  --accent-secondary-foreground: #ffffff;
+  --border: #000000;
+  --dark-section: #000000;
+  --dark-section-foreground: #ffffff;
+}
+
+/* Emphasize every link with a visible underline. */
+html[data-a11y-underline-links="on"] a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+/* Force the single, more-legible body typeface everywhere — including
+   headings, which normally use the display serif — and loosen spacing
+   slightly. No new font is loaded; this reuses next/font/google's
+   already-loaded Heebo (the site's own body font). */
+html[data-a11y-readable-font="on"] * {
+  font-family: var(--font-body) !important;
+  letter-spacing: 0.01em;
+}
+
+html[data-a11y-readable-font="on"] p,
+html[data-a11y-readable-font="on"] li {
+  line-height: 1.9 !important;
+}
+
+/* User-triggered "reduce motion," mirroring the OS-level
+   prefers-reduced-motion block above. The Hero video specifically is
+   stopped in JS (see HeroSection.tsx) since CSS alone cannot pause a
+   <video> element. */
+html[data-a11y-reduce-motion="on"] {
+  scroll-behavior: auto;
+}
+
+html[data-a11y-reduce-motion="on"] *,
+html[data-a11y-reduce-motion="on"] *::before,
+html[data-a11y-reduce-motion="on"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

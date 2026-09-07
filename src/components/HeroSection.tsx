@@ -6,11 +6,20 @@ import { hero, media } from "@/data/site-content";
 function subscribeToMotionPreference(onChange: () => void) {
   const query = window.matchMedia("(prefers-reduced-motion: reduce)");
   query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
+  // Dispatched by AccessibilityWidget whenever its "הפחתת אנימציות" toggle
+  // changes, so the video reacts to the user's in-site choice too, not just
+  // the OS-level media query.
+  window.addEventListener("a11y-settings-change", onChange);
+  return () => {
+    query.removeEventListener("change", onChange);
+    window.removeEventListener("a11y-settings-change", onChange);
+  };
 }
 
 function getMotionAllowed() {
-  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const systemReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const userReducedMotion = document.documentElement.getAttribute("data-a11y-reduce-motion") === "on";
+  return !systemReducedMotion && !userReducedMotion;
 }
 
 function getMotionAllowedServerSnapshot() {

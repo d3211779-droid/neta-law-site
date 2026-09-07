@@ -77,7 +77,7 @@ export const siteMeta = {
 export const media = {
   logo: {
     src: "/images/logo.png",
-    alt: 'עו״ד נטע בן חמו',
+    alt: "נטע בן חמו - עורכת דין",
     width: 1325,
     height: 1187,
   },
@@ -335,12 +335,12 @@ export const contactPage = {
   submittedNote: "תודה! זוהי הדגמה בלבד ולא נשלח מידע.",
 };
 
-// Only routes that actually exist — no privacy/accessibility links until
-// those pages are built.
+// Only routes that actually exist.
 export const footerLinks: FooterLink[] = [
   { label: "אודות", href: "/about" },
   { label: "תחומי עיסוק", href: "/practice-areas" },
   { label: "יצירת קשר", href: "/contact" },
+  { label: "הצהרת נגישות", href: "/accessibility" },
 ];
 
 // Dictated verbatim — not a placeholder.
@@ -349,3 +349,34 @@ export const legalDisclaimer = "המידע באתר הוא מידע כללי ב�
 // Dictated verbatim — not a placeholder. Used on service pages specifically.
 export const servicePageDisclaimer =
   "המידע בעמוד הוא מידע כללי בלבד ואינו מהווה ייעוץ משפטי. כל מקרה נבחן בהתאם לנסיבותיו.";
+
+// CONFIRMED — dictated verbatim by the client, not draft copy. Do not add
+// language claiming full/legal standards compliance beyond what's written
+// here (the client was explicit about this).
+export const accessibilityPage = {
+  metaTitle: 'הצהרת נגישות | עו"ד נטע בן חמו',
+  metaDescription: "הצהרת הנגישות של אתר משרד עורכת הדין נטע בן חמו.",
+  heading: "הצהרת נגישות",
+  paragraphs: [
+    "משרד עורכת הדין נטע בן חמו רואה חשיבות רבה במתן שירות שוויוני ונגיש לכלל הציבור, לרבות אנשים עם מוגבלויות.",
+    "אנו פועלים על מנת לאפשר חוויית גלישה נוחה ונגישה ככל האפשר באתר, ומשקיעים מאמצים בהתאמת האתר לשימוש באמצעות טכנולוגיות מסייעות.",
+  ],
+  accommodationsIntro: "באתר בוצעו, בין היתר, התאמות הכוללות:",
+  accommodations: [
+    "אפשרות לשינוי גודל הטקסט.",
+    "התאמות ניגודיות.",
+    "הדגשת קישורים.",
+    "אפשרות להפחתת אנימציות.",
+    "ניווט באמצעות מקלדת.",
+    "טקסטים חלופיים לתמונות.",
+    "מבנה תוכן וכותרות המסייע להתמצאות באתר.",
+  ],
+  limitationsNote:
+    "ייתכן שלמרות המאמצים להנגיש את כלל חלקי האתר, יתגלו חלקים שטרם הונגשו באופן מלא. אנו ממשיכים לפעול לשיפור נגישות האתר.",
+  feedbackTitle: "נתקלתם בבעיית נגישות?",
+  feedbackText: "נשמח שתעדכנו אותנו ונפעל לבחינת הפנייה ולתיקונה ככל שניתן.",
+  contactTitle: "פרטי יצירת קשר בנושא נגישות:",
+  contactName: "נטע בן חמו, עורכת דין",
+  addressTitle: "כתובת המשרד:",
+  lastUpdated: "תאריך עדכון אחרון של הצהרת הנגישות: ספטמבר 2026",
+};
