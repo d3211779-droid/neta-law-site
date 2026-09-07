@@ -41,7 +41,7 @@ export default function SiteHeader() {
           : "border-b border-transparent bg-transparent text-dark-section-foreground"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 ps-3 pe-4 py-5 sm:ps-4 sm:pe-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-3 py-5 sm:px-4">
         <Link href="/" className="shrink-0">
           <Image
             src={media.logo.src}

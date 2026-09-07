@@ -34,26 +34,6 @@
      new hue. Used where a page wants gentle separation from the site's
      default bg-background without introducing a new color. */
   --surface-tint: color-mix(in srgb, var(--accent) 5%, var(--background));
-
-  /* Hero background video framing — isolated here so desktop/mobile crop can
-     be retuned later without touching HeroSection.tsx. Source composition:
-     Neta on the left, agricultural landscape across the frame, open visual
-     space toward the right (used for the text overlay on every breakpoint —
-     the video stays visible and looping on mobile too, not swapped out).
-     No frame-preview tool was available while tuning these — treat as a
-     starting point, not a final calibration.
-     Desktop: mild left bias (35%) — most desktop/tablet-landscape widths are
-     wide enough that object-fit: cover crops top/bottom only and shows the
-     full frame width regardless; the bias only matters on narrower
-     landscape widths (e.g. 1024px tablets), where it sacrifices the empty
-     right space before it touches Neta or the fields.
-     Mobile: moderate left bias (28%) — enough to keep Neta's face out of the
-     crop, while still leaving some right-side space for the overlaid text
-     (unlike a hard zoom-to-subject crop, which would lose that space
-     entirely).
-  */
-  --hero-video-position-desktop: 35% 45%;
-  --hero-video-position-mobile: 28% center;
 }
 
 @theme inline {
@@ -166,37 +146,4 @@ body {
 
 .portrait-reveal {
   animation: portrait-fade-scale 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Hero background video — object-position isolated per breakpoint so it can
-   be retuned without touching component markup. Applied to both the mobile
-   and desktop <video> elements; only one is ever mounted at a given
-   breakpoint (see HeroSection.tsx), so the media query below is the single
-   place that decides which framing is active. */
-.hero-video {
-  object-position: var(--hero-video-position-mobile);
-}
-
-@media (min-width: 1024px) {
-  .hero-video {
-    object-position: var(--hero-video-position-desktop);
-  }
-}
-
-/* Subtle right-anchored tint for text legibility over the video. Transparent
-   across most of the frame; only the right edge (where the Hero content
-   sits) picks up a soft darkening. Deliberately not a full-frame overlay. */
-.hero-video-overlay {
-  background: linear-gradient(
-    to left,
-    color-mix(in srgb, var(--dark-section) 55%, transparent) 0%,
-    color-mix(in srgb, var(--dark-section) 25%, transparent) 30%,
-    transparent 60%
-  );
-}
-
-/* A small, deliberate contrast aid for Hero text sitting directly on the
-   video (no opaque backing) — not a redesign of type color/weight/size. */
-.hero-content {
-  text-shadow: 0 1px 10px color-mix(in srgb, var(--dark-section) 45%, transparent);
 }

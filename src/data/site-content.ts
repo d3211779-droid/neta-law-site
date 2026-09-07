@@ -68,9 +68,12 @@ export const siteMeta = {
 // logo.png (replaces the original logo.jpeg) is a true RGBA PNG with real
 // alpha transparency — confirmed by decoding it (all four corners sample at
 // alpha 0), not just its extension. No mix-blend-mode is needed for it.
-// heroVideo is not wired up to any component beyond the Hero.
-// portrait is used exclusively on /about (src/app/about/page.tsx) per the
-// client's request — do not add it to the Hero or any other section.
+// heroVideo: the file stays on disk but is currently unused — the Hero was
+// switched back to the static portrait (see HeroSection.tsx) so the client
+// could get sharper, higher-resolution quality than the 1024x576 source
+// video allowed. The field is kept so the video can be reintroduced without
+// re-uploading anything.
+// portrait is used on /about and, as of this pass, the Hero as well.
 export const media = {
   logo: {
     src: "/images/logo.png",
