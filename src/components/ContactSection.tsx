@@ -1,19 +1,33 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { contactDetails, contactFieldsOfInterest, contactPage } from "@/data/site-content";
 import { MailIcon, PhoneIcon } from "@/components/icons";
+import { submitContactForm, type ContactFormState } from "@/app/contact/actions";
 
 const fieldClasses =
   "w-full border-0 border-b border-dark-section-foreground/30 bg-transparent px-0 py-2.5 text-dark-section-foreground placeholder:text-dark-section-foreground/40 focus:border-accent focus:outline-none focus:ring-0";
 
-export default function ContactSection() {
-  const [submitted, setSubmitted] = useState(false);
+const initialState: ContactFormState = { status: "idle" };
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-  }
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      aria-disabled={pending}
+      className="mt-6 w-full bg-accent px-6 py-3.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section-foreground hover:text-dark-section disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+    >
+      {pending ? contactPage.submittingLabel : contactPage.submitLabel}
+    </button>
+  );
+}
+
+export default function ContactSection() {
+  const [state, formAction] = useActionState(submitContactForm, initialState);
 
   return (
     <section className="bg-dark-section text-dark-section-foreground">
@@ -47,7 +61,15 @@ export default function ContactSection() {
         </div>
 
         <div className="lg:w-7/12">
-          <form onSubmit={handleSubmit} aria-label="טופס יצירת קשר להדגמה בלבד" className="max-w-lg">
+          <form action={formAction} aria-label="טופס יצירת קשר" className="max-w-lg">
+            {/* Honeypot — invisible to sighted users and to screen readers
+                (aria-hidden + removed from tab order), so only an automated
+                filler will ever populate it. A human never encounters it. */}
+            <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+              <label htmlFor="company">אל תמלאו שדה זה</label>
+              <input type="text" id="company" name="company" tabIndex={-1} autoComplete="off" />
+            </div>
+
             <div className="grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="block text-base font-medium text-dark-section-foreground/70">
@@ -67,7 +89,7 @@ export default function ContactSection() {
                 <label htmlFor="email" className="block text-base font-medium text-dark-section-foreground/70">
                   דוא&quot;ל
                 </label>
-                <input id="email" name="email" type="email" autoComplete="email" required className={`${fieldClasses} mt-1.5`} />
+                <input id="email" name="email" type="email" autoComplete="email" className={`${fieldClasses} mt-1.5`} />
               </div>
 
               <div className="sm:col-span-2">
@@ -91,23 +113,33 @@ export default function ContactSection() {
                   ))}
                 </select>
               </div>
+
+              <div className="sm:col-span-2">
+                <label htmlFor="message" className="block text-base font-medium text-dark-section-foreground/70">
+                  תוכן ההודעה
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  required
+                  className={`${fieldClasses} mt-1.5 resize-y`}
+                />
+              </div>
             </div>
 
             <p className="mt-6 text-base leading-relaxed text-dark-section-foreground/70">
               {contactPage.privacyNote}
             </p>
 
-            <button
-              type="submit"
-              className="mt-6 w-full bg-accent px-6 py-3.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section-foreground hover:text-dark-section sm:w-auto"
-            >
-              {contactPage.submitLabel}
-            </button>
-
-            <p className="mt-3 text-base text-dark-section-foreground/70">{contactPage.demoNote}</p>
+            <SubmitButton />
 
             <p role="status" aria-live="polite" className="mt-3 text-base font-medium text-accent-secondary">
-              {submitted ? contactPage.submittedNote : ""}
+              {state.status === "success"
+                ? contactPage.submittedNote
+                : state.status === "error"
+                  ? contactPage.errorNote
+                  : ""}
             </p>
           </form>
         </div>

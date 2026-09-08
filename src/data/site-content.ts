@@ -155,6 +155,18 @@ export function practiceAreaHref(slug: string): string {
   return `/practice-areas/${slug}`;
 }
 
+// Card-grid display order for the /practice-areas page specifically. Kept
+// separate from practiceAreas's own array order (which drives the header's
+// mobile dropdown and the homepage teaser) so reordering the grid doesn't
+// reorder those.
+export const practiceAreasGridOrder = [
+  "nachalot",
+  "real-estate",
+  "mediation",
+  "wills-inheritance",
+  "lasting-power-of-attorney",
+];
+
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (all legal-substance copy is
 // general and drafted for the template; the Nachalot topics below fold in
 // the client's suggested subtopics rather than becoming separate pages)
@@ -264,7 +276,7 @@ export const practiceAreasPage = {
   metaDescription: "סקירת תחומי העיסוק של המשרד: נחלות, ירושה, ייפוי כוח מתמשך, מקרקעין וגישור.",
   heading: "תחומי עיסוק",
   intro: "ליווי משפטי בעולם המקרקעין, הנחלות, הירושה וניהול הסכסוכים.",
-  itemLinkLabel: "לעמוד המלא",
+  itemLinkLabel: "קרא עוד",
   additionalHeading: "תחומים נוספים",
 };
 
@@ -322,17 +334,18 @@ export const contactFieldsOfInterest = [
 ];
 
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (except the privacy note,
-// which is dictated verbatim)
+// submittedNote and errorNote, which are dictated verbatim)
 export const contactPage = {
   metaTitle: 'יצירת קשר | עו"ד נטע בן חמו',
-  metaDescription: "פרטי התקשרות וטופס יצירת קשר להדגמה בלבד.",
+  metaDescription: "פרטי התקשרות וטופס יצירת קשר עם משרד עורכת הדין נטע בן חמו.",
   title: "יצירת קשר",
   subtitle: "יש נושא שדורש בחינה משפטית? השאירו פרטים ונחזור אליכם לתיאום שיחת היכרות ראשונית.",
   privacyNote:
     "נא לא למסור בטופס מידע משפטי, אישי או רגיש. השארת פרטים אינה יוצרת יחסי עורך דין–לקוח.",
-  demoNote: "טופס זה במצב הדגמה בלבד ואינו שולח מידע לשרת.",
   submitLabel: "שליחה",
-  submittedNote: "תודה! זוהי הדגמה בלבד ולא נשלח מידע.",
+  submittingLabel: "שולח...",
+  submittedNote: "תודה, פנייתך התקבלה ונחזור אליך בהקדם.",
+  errorNote: "אירעה שגיאה בשליחת הפנייה. ניתן לפנות אלינו גם בטלפון או במייל.",
 };
 
 // Only routes that actually exist.
