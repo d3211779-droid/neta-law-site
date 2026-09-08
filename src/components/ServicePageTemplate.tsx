@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export default function ServicePageTemplate({ content }: { content: ServicePageContent }) {
   return (
     <article className="bg-background">
-      <div className="mx-auto max-w-3xl px-4 pb-16 pt-28 sm:px-6 sm:pb-24 sm:pt-32">
+      <div className="mx-auto max-w-3xl px-4 pb-16 pt-32 sm:px-6 sm:pb-24 lg:pt-40">
         <Breadcrumbs
           items={[
             { label: "ראשי", href: "/" },

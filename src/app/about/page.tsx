@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-background">
-      <div className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6 sm:pb-28 sm:pt-32">
+      <div className="mx-auto max-w-6xl px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:pt-40">
         <Breadcrumbs items={[{ label: "ראשי", href: "/" }, { label: "אודות" }]} />
 
         <div className="mt-8 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">

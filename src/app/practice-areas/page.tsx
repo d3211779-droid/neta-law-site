@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PracticeAreasPage() {
   return (
     <div className="bg-surface-tint">
-      <div className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6 sm:pb-28 sm:pt-32">
+      <div className="mx-auto max-w-6xl px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:pt-40">
         <Breadcrumbs items={[{ label: "ראשי", href: "/" }, { label: "תחומי עיסוק" }]} />
 
         <h1 className="mt-6 max-w-xl font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
