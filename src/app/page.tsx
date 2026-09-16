@@ -17,11 +17,18 @@
  * clarity, shtilman.co.il-adjacent rural visual register) — built directly
  * from real client-discovery content, no concept-seed roll.
  */
+import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
 import { PracticeAreasHomeTeaser } from "@/components/PracticeAreas";
 import AboutSection from "@/components/AboutSection";
 import BrandStatement from "@/components/BrandStatement";
 import ContactCallout from "@/components/ContactCallout";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (

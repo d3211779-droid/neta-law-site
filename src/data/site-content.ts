@@ -247,10 +247,11 @@ export const servicePages: Record<string, ServicePageContent> = {
   },
 };
 
-// TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
+// CONFIRMED — title and description dictated verbatim by the client for SEO.
 export const homeMeta: PageMeta = {
-  title: 'עו"ד נטע בן חמו | מקרקעין, נחלות וגישור',
-  description: "ליווי משפטי מקצועי ואישי בסוגיות מקרקעין, נחלות, ירושה, תכנון משפחתי ויישוב סכסוכים.",
+  title: "נטע בן חמו | עורכת דין – מקרקעין, נחלות, ירושות וגישור",
+  description:
+    "עו\"ד נטע בן חמו מעניקה ייעוץ וליווי משפטי בתחומי המקרקעין, נחלות ומשקים, צוואות וירושות, ייפוי כוח מתמשך, גישור וסכסוכים אזרחיים.",
 };
 
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (draft marketing copy, per the

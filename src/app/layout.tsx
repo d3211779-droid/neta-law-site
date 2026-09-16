@@ -40,6 +40,7 @@ const body = Heebo({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.netta-bh.co.il"),
   title: homeMeta.title,
   description: homeMeta.description,
 };
