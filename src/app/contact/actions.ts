@@ -3,12 +3,7 @@
 const RECIPIENT_EMAIL = "nettabhlaw@gmail.com";
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
-// Resend's shared sandbox sender — works immediately, with no domain
-// verification, and can deliver to any recipient. Once a custom domain is
-// verified in the Resend dashboard, swap this for an address on that domain
-// (e.g. "אתר נטע בן חמו <no-reply@netabenhamo.co.il>") for better
-// deliverability and inbox branding.
-const FROM_ADDRESS = "אתר נטע בן חמו <onboarding@resend.dev>";
+const FROM_ADDRESS = "אתר נטע בן חמו <website@netta-bh.co.il>";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
