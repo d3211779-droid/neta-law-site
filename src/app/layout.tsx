@@ -43,6 +43,23 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteMeta.siteUrl),
   title: homeMeta.title,
   description: homeMeta.description,
+  // Explicit rel="icon" declarations at fixed, query-free URLs. favicon.ico,
+  // icon0/1/2.png and apple-icon.png are still generated and served by
+  // Next's app-icon file convention (see those files under src/app/) — this
+  // just makes their <head> tags explicit with permanently stable URLs,
+  // instead of relying only on Next's auto-detected (content-hashed) <link>
+  // tags. favicon.ico itself is omitted from `icon` here because Next always
+  // auto-injects it as the first icon regardless of this config — listing it
+  // again would just duplicate that tag.
+  icons: {
+    icon: [
+      { url: "/icon0.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon1.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon2.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     title: homeMeta.title,
     description: homeMeta.description,
