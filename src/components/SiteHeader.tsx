@@ -42,7 +42,7 @@ export default function SiteHeader() {
       }`}
     >
       <div className="flex w-full items-center justify-between gap-4 px-6 py-5 lg:px-10">
-        <Link href="/" className="shrink-0">
+        <Link href="/" scroll={true} className="shrink-0">
           <Image
             src={media.logo.src}
             alt={media.logo.alt}
@@ -62,6 +62,7 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                scroll={true}
                 className="text-base font-medium opacity-90 transition-opacity hover:opacity-100 hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-8"
               >
                 {item.label}
@@ -105,7 +106,7 @@ export default function SiteHeader() {
         >
           <ul className="flex flex-col divide-y divide-border/15 pt-2">
             <li>
-              <Link href="/" className="block py-3 text-base font-medium" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/" scroll={true} className="block py-3 text-base font-medium" onClick={() => setIsMenuOpen(false)}>
                 ראשי
               </Link>
             </li>
