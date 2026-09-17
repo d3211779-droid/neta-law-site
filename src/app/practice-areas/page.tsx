@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { practiceAreasPage } from "@/data/site-content";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PracticeAreasIndex } from "@/components/PracticeAreas";
 
-export const metadata: Metadata = {
-  title: practiceAreasPage.metaTitle,
-  description: practiceAreasPage.metaDescription,
-};
+export const metadata: Metadata = buildMetadata(
+  practiceAreasPage.metaTitle,
+  practiceAreasPage.metaDescription,
+  "/practice-areas"
+);
 
 export default function PracticeAreasPage() {
   return (

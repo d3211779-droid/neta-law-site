@@ -102,14 +102,14 @@ export default function HeroSection() {
       {/* Layer 4 — content: right-aligned (RTL default), vertically centered via the section's own flex layout. */}
       <div className="hero-content relative z-10 flex w-full justify-start px-4 py-16 sm:px-6 sm:py-20 lg:px-12 lg:py-28 xl:px-20">
         <div className="flex max-w-xs flex-col gap-6 sm:max-w-sm sm:gap-8 md:max-w-md lg:max-w-xl">
-          <p
+          <h1
             className="hero-fade-up text-base font-medium tracking-[0.04em] text-dark-section-foreground/70"
             style={{ animationDelay: "0ms" }}
           >
             {hero.eyebrow}
-          </p>
+          </h1>
 
-          <h1 className="font-[family-name:var(--font-heading)] text-3xl font-semibold leading-[1.1] sm:text-4xl md:text-5xl lg:text-[clamp(2.5rem,5vw+1rem,4.5rem)] lg:leading-[1.08]">
+          <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold leading-[1.1] sm:text-4xl md:text-5xl lg:text-[clamp(2.5rem,5vw+1rem,4.5rem)] lg:leading-[1.08]">
             {hero.titleLines.map((line, index) => (
               <span
                 key={line}
@@ -119,7 +119,7 @@ export default function HeroSection() {
                 {line}
               </span>
             ))}
-          </h1>
+          </p>
 
           <p
             className="hero-fade-up text-base leading-relaxed text-dark-section-foreground/85 sm:text-lg"

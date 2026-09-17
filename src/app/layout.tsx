@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Frank_Ruhl_Libre, Heebo } from "next/font/google";
-import { homeMeta } from "@/data/site-content";
+import { homeMeta, media, siteMeta } from "@/data/site-content";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AccessibilityWidget from "@/components/AccessibilityWidget";
@@ -40,9 +40,24 @@ const body = Heebo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.netta-bh.co.il"),
+  metadataBase: new URL(siteMeta.siteUrl),
   title: homeMeta.title,
   description: homeMeta.description,
+  openGraph: {
+    title: homeMeta.title,
+    description: homeMeta.description,
+    siteName: siteMeta.wordmark,
+    locale: "he_IL",
+    type: "website",
+    images: [
+      {
+        url: media.logo.src,
+        width: media.logo.width,
+        height: media.logo.height,
+        alt: media.logo.alt,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

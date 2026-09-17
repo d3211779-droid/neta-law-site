@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { accessibilityPage, contactDetails } from "@/data/site-content";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
-export const metadata: Metadata = {
-  title: accessibilityPage.metaTitle,
-  description: accessibilityPage.metaDescription,
-};
+export const metadata: Metadata = buildMetadata(
+  accessibilityPage.metaTitle,
+  accessibilityPage.metaDescription,
+  "/accessibility"
+);
 
 export default function AccessibilityPage() {
   return (

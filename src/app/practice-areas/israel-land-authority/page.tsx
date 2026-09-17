@@ -3,14 +3,14 @@ import { servicePages } from "@/data/site-content";
 import { buildMetadata } from "@/lib/seo";
 import ServicePageTemplate from "@/components/ServicePageTemplate";
 
-const content = servicePages["wills-inheritance"];
+const content = servicePages["israel-land-authority"];
 
 export const metadata: Metadata = buildMetadata(
   content.metaTitle,
   content.metaDescription,
-  "/practice-areas/wills-inheritance"
+  "/practice-areas/israel-land-authority"
 );
 
-export default function WillsInheritancePage() {
+export default function IsraelLandAuthorityPage() {
   return <ServicePageTemplate content={content} />;
 }

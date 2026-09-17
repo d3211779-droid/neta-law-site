@@ -20,9 +20,9 @@ export type PracticeArea = {
   featured?: boolean;
 };
 
-export type AdditionalPracticeArea = {
-  title: string;
-  description: string;
+export type ServicePageSection = {
+  heading: string;
+  paragraphs: string[];
 };
 
 export type ServicePageContent = {
@@ -31,9 +31,13 @@ export type ServicePageContent = {
   metaTitle: string;
   metaDescription: string;
   intro: string;
+  sections: ServicePageSection[];
+  topicsHeading: string;
   topics: string[];
   whenToConsultTitle: string;
   whenToConsult: string;
+  /** 2–3 related practice-area slugs, for internal linking between service pages. */
+  relatedSlugs: string[];
 };
 
 export type ContactDetails = {
@@ -61,6 +65,7 @@ export const siteMeta = {
   lawyerFullName: 'עו"ד נטע בן חמו',
   lawyerName: "נטע בן חמו",
   wordmark: "נטע בן חמו | עורכת דין",
+  siteUrl: "https://www.netta-bh.co.il",
 };
 
 // CONFIRMED real client assets. width/height are the source files' true
@@ -107,14 +112,36 @@ export const nav: NavItem[] = [
   { label: "יצירת קשר", href: "/contact" },
 ];
 
-// CONFIRMED — the five practice areas and their order are client-provided.
-// Descriptions are draft, one line each, and may be refined.
+// CONFIRMED — ten practice areas, each with its own dedicated page. Order
+// groups related topics together: land/real-estate, family/estate planning,
+// disputes, then mediation. Titles match each service page's own H1 exactly,
+// so the card, the header nav, and the page itself never disagree.
 export const practiceAreas: PracticeArea[] = [
   {
     slug: "nachalot",
-    title: "נחלות ומשקים חקלאיים",
-    shortDescription: "זכויות, ירושה, בן ממשיך והעברה בין־דורית בנחלות ובמשקים חקלאיים.",
+    title: "נחלות ומשקים במושבים",
+    shortDescription: "זכויות, ירושה, בן ממשיך והעברה בין־דורית בנחלות ובמשקים במושבים.",
     featured: true,
+  },
+  {
+    slug: "real-estate",
+    title: 'מקרקעין ועסקאות נדל"ן',
+    shortDescription: 'ליווי בעסקאות מכר, רכישה והסכמים במקרקעין ונדל"ן.',
+  },
+  {
+    slug: "israel-land-authority",
+    title: "רשות מקרקעי ישראל",
+    shortDescription: "ליווי מול רשות מקרקעי ישראל בסוגיות זכויות, הקצאות והסדרת מקרקעין.",
+  },
+  {
+    slug: "planning-and-building",
+    title: "תכנון ובנייה",
+    shortDescription: "ליווי משפטי בסוגיות תכנון ובנייה וזכויות בנייה במקרקעין.",
+  },
+  {
+    slug: "cooperative-societies",
+    title: "אגודות שיתופיות",
+    shortDescription: "זכויות חברים, פניות והחלטות מוסדות מול אגודות שיתופיות.",
   },
   {
     slug: "wills-inheritance",
@@ -127,9 +154,14 @@ export const practiceAreas: PracticeArea[] = [
     shortDescription: "הסדרת ייפוי כוח מתמשך לעתיד, מתוך בחירה ומראש.",
   },
   {
-    slug: "real-estate",
-    title: "עסקאות מקרקעין",
-    shortDescription: "ליווי בעסקאות מכר, רכישה והסכמים במקרקעין.",
+    slug: "financial-disputes",
+    title: "סכסוכים כספיים",
+    shortDescription: "ייצוג בסכסוכים כספיים ומחלוקות אזרחיות, תוך בחינת האסטרטגיה המתאימה.",
+  },
+  {
+    slug: "national-insurance",
+    title: "תביעות מול המוסד לביטוח לאומי",
+    shortDescription: "ליווי בתביעות ובהליכים מול המוסד לביטוח לאומי.",
   },
   {
     slug: "mediation",
@@ -138,70 +170,237 @@ export const practiceAreas: PracticeArea[] = [
   },
 ];
 
-// CONFIRMED — mentioned quietly on the practice-areas index only, per the
-// client brief. No dedicated pages exist for these yet.
-export const additionalPracticeAreas: AdditionalPracticeArea[] = [
-  {
-    title: "ליטיגציה אזרחית",
-    description: "ייצוג וליווי בהליכים אזרחיים.",
-  },
-  {
-    title: "תביעות מול המוסד לביטוח לאומי",
-    description: "ליווי בתביעות וערעורים מול המוסד לביטוח לאומי.",
-  },
-];
-
 export function practiceAreaHref(slug: string): string {
   return `/practice-areas/${slug}`;
 }
 
-// Card-grid display order for the /practice-areas page specifically. Kept
-// separate from practiceAreas's own array order (which drives the header's
-// mobile dropdown and the homepage teaser) so reordering the grid doesn't
-// reorder those.
-export const practiceAreasGridOrder = [
-  "nachalot",
-  "real-estate",
-  "mediation",
-  "wills-inheritance",
-  "lasting-power-of-attorney",
-];
+export function practiceAreaBySlug(slug: string): PracticeArea | undefined {
+  return practiceAreas.find((area) => area.slug === slug);
+}
+
+// Card-grid display order for the /practice-areas page. All ten areas now
+// have a dedicated page, so the grid simply mirrors practiceAreas's order.
+export const practiceAreasGridOrder = practiceAreas.map((area) => area.slug);
 
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (all legal-substance copy is
-// general and drafted for the template; the Nachalot topics below fold in
-// the client's suggested subtopics rather than becoming separate pages)
+// general and educational, drafted for the template. It describes what each
+// service covers — it does not claim case outcomes, success rates, or a
+// specific number of years of experience.)
 export const servicePages: Record<string, ServicePageContent> = {
   nachalot: {
     slug: "nachalot",
-    title: "נחלות ומשקים חקלאיים",
-    metaTitle: 'נחלות ומשקים חקלאיים | עו"ד נטע בן חמו',
+    title: "נחלות ומשקים במושבים",
+    metaTitle: 'עורך דין נחלות ומשקים במושבים | נטע בן חמו',
     metaDescription:
-      "ליווי משפטי בנחלות ומשקים חקלאיים: בן ממשיך, העברה בין־דורית והורשת משק.",
+      "ייעוץ וליווי משפטי בנושאי נחלות, משקים במושבים, העברה בין דורית, זכויות בנחלה והסדרת סוגיות משפטיות במרחב הכפרי.",
     intro:
-      "ליווי משפטי בסוגיות זכויות, ירושה והעברה בנחלות ובמשקים חקלאיים, מתוך הבנה של המורכבות הייחודית של המרחב הכפרי והחיים החקלאיים.",
-    topics: ["נחלות ומשקים חקלאיים", "בן ממשיך", "העברה בין־דורית", "הורשת משק ונחלה"],
+      "נחלות ומשקים במושבים הם נכס משפחתי וכלכלי מורכב, שבו נפגשים דיני הירושה עם תקנון האגודה השיתופית ומדיניות רשות מקרקעי ישראל. ליווי משפטי בתחום דורש היכרות אמיתית עם המרחב הכפרי, לצד דיוק משפטי.",
+    sections: [
+      {
+        heading: "מה כולל הליווי המשפטי בנחלות",
+        paragraphs: [
+          "התנהלות סביב נחלה נוגעת לרוב בכמה שכבות בו־זמנית: מיהו בן הממשיך, כיצד מוסדרת הזכות מול רשות מקרקעי ישראל והאגודה השיתופית, ומה קורה לזכויות בנחלה כשבעליה נפטר או מבקש להעביר אותה בחייו.",
+          "ליווי משפטי בתחום כולל בחינת מעמד הזכויות הקיימות בנחלה, בדיקת ההסכמים וההחלטות מול האגודה השיתופית, וליווי בתהליך ההעברה או ההסדרה — בין שמדובר בהעברה בין־דורית מתוכננת ובין שמדובר במחלוקת שכבר התגלעה בין בני המשפחה.",
+        ],
+      },
+      {
+        heading: "העברה בין־דורית והורשת משק",
+        paragraphs: [
+          'העברת נחלה בין דורות מעלה שאלות שאינן קיימות בהורשת נכס "רגיל": מעמדו של בן הממשיך, זכויות שאר הילדים, ותנאי האגודה השיתופית ורשות מקרקעי ישראל להכרה בהעברה. תכנון מוקדם ומדויק יכול לחסוך חלק ניכר מהמחלוקות שעלולות להתעורר בהמשך.',
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
+    topics: [
+      "מעמד בן ממשיך וזכויותיו",
+      "העברה בין־דורית של הנחלה",
+      "הורשת משק ונחלה בין יורשים",
+      "התנהלות מול האגודה השיתופית ורשות מקרקעי ישראל",
+    ],
     whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
     whenToConsult:
       "מומלץ לפנות בתחילת תהליך תכנון ההעברה או הירושה, לפני חתימה על מסמכים או הסכמות בין הצדדים.",
+    relatedSlugs: ["israel-land-authority", "cooperative-societies", "wills-inheritance"],
+  },
+  "real-estate": {
+    slug: "real-estate",
+    title: 'מקרקעין ועסקאות נדל"ן',
+    metaTitle: 'עורך דין מקרקעין ונדל"ן | נטע בן חמו',
+    metaDescription:
+      'ליווי משפטי בעסקאות מקרקעין ונדל"ן, בדיקות משפטיות, הסכמים וטיפול בסוגיות הקשורות לזכויות במקרקעין.',
+    intro:
+      'ליווי משפטי בעסקאות מכר, רכישה והסכמים במקרקעין ונדל"ן, פרטיים ומסחריים, משלב המשא ומתן ועד לרישום הזכויות.',
+    sections: [
+      {
+        heading: "בדיקות משפטיות לפני עסקה",
+        paragraphs: [
+          "לפני חתימה על כל עסקה במקרקעין חשוב לבדוק את המצב המשפטי והתכנוני של הנכס: רישום הזכויות, שעבודים קיימים, היתרי בנייה ותאימות לתכנית המתאר החלה. בדיקה מוקדמת יכולה לחסוך בעיות שמתגלות רק בשלב מאוחר יותר.",
+          "ליווי משפטי בעסקה כולל ניסוח ובחינה של הסכם המכר או הרכישה, וטיפול מול הרשויות והגורמים הרלוונטיים לרישום הזכויות על שם הרוכש.",
+        ],
+      },
+      {
+        heading: "עסקאות בין קרובים ומול צדדים שלישיים",
+        paragraphs: [
+          "עסקאות במקרקעין בין בני משפחה מעלות לעיתים שיקולים נוספים — מיסוי, ציפיות משפחתיות והסכמות בעל־פה שכדאי להעלות על הכתב. גם בעסקה מול צד שלישי, הסכם מדויק וברור מראש הוא הדרך הטובה ביותר למנוע מחלוקת בהמשך.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
+    topics: [
+      "בדיקת מצב משפטי ותכנוני של הנכס",
+      "עריכת הסכמי מכר ורכישה",
+      "ליווי מול הרשויות והרישום",
+      "עסקאות בין קרובים ובין צדדים שלישיים",
+    ],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult: "מומלץ לפנות לפני חתימה על זיכרון דברים או הסכם, כדי לבחון את הזכויות והתנאים מראש.",
+    relatedSlugs: ["israel-land-authority", "planning-and-building", "nachalot"],
+  },
+  "israel-land-authority": {
+    slug: "israel-land-authority",
+    title: "רשות מקרקעי ישראל",
+    metaTitle: "רשות מקרקעי ישראל – ייעוץ וליווי משפטי | נטע בן חמו",
+    metaDescription:
+      "ליווי משפטי בהתנהלות מול רשות מקרקעי ישראל ובסוגיות הנוגעות לזכויות, הקצאות והסדרת מקרקעין.",
+    intro:
+      'חלק ניכר מהזכויות במקרקעין בישראל — ובהן זכויות בנחלות ובמשקי עזר — מוסדר מול רשות מקרקעי ישראל (רמ"י). התנהלות מול הרשות כרוכה בהליכים ובכללי מדיניות ייחודיים, שונים במהותם מעסקה במקרקעין פרטיים.',
+    sections: [
+      {
+        heading: "התנהלות מול רשות מקרקעי ישראל",
+        paragraphs: [
+          'פנייה לרמ"י יכולה לעסוק בהקצאת זכויות, אישור עסקה, שינוי ייעוד, או בחינת החלטת מועצת מקרקעי ישראל הרלוונטית למקרה הספציפי. לכל הליך כזה נהלים, טפסים ולוחות זמנים משלו.',
+          "ליווי משפטי מול הרשות כולל בחינת מעמד הזכויות הקיים, הבנת הדרישות החלות על המקרה, והכנת הפנייה או הערר בהתאם לנהלי הרשות.",
+        ],
+      },
+      {
+        heading: "זכויות, הקצאות והסדרות",
+        paragraphs: [
+          'סוגיות מול רמ"י מתעוררות לעיתים קרובות יחד עם נושאים נוספים — זכויות בנחלה, שינוי ייעוד קרקע לקראת עסקה, או בירור מעמד משפטי לפני מכירה. בחינה משפטית מוקדמת יכולה לחסוך עיכובים ואי־ודאות מול הרשות.',
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
+    topics: [
+      'הקצאות זכויות וחכירה מול רמ"י',
+      "שינוי ייעוד והסדרת שימושים בקרקע",
+      "ערר או פנייה על החלטות הרשות",
+      "בירור מעמד זכויות לפני עסקה במקרקעין",
+    ],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult:
+      "מומלץ לפנות לפני הגשת בקשה או פנייה לרשות מקרקעי ישראל, וכן בכל מקרה של אי־בהירות לגבי מעמד הזכויות בקרקע.",
+    relatedSlugs: ["nachalot", "real-estate", "planning-and-building"],
+  },
+  "planning-and-building": {
+    slug: "planning-and-building",
+    title: "תכנון ובנייה",
+    metaTitle: "עורך דין תכנון ובנייה | נטע בן חמו",
+    metaDescription:
+      "ייעוץ וליווי משפטי בסוגיות תכנון ובנייה, זכויות בנייה, הליכים תכנוניים וסוגיות הקשורות למקרקעין.",
+    intro:
+      "זכויות הבנייה החלות על מקרקעין וההליכים מול מוסדות התכנון משפיעים באופן ישיר על שוויו ועל אפשרויות הניצול של כל נכס. בירור המצב התכנוני הוא שלב מרכזי בכל תכנון או עסקה הקשורים למקרקעין.",
+    sections: [
+      {
+        heading: "מהן סוגיות תכנון ובנייה",
+        paragraphs: [
+          "תחום התכנון והבנייה עוסק בזכויות הבנייה החלות על מקרקעין, בתכניות המתאר וההליכים התכנוניים המשפיעים עליהן, ובבחינת ההתאמה בין מצב הנכס בפועל לבין ההיתר והרישוי הקיימים.",
+          "ליווי משפטי בתחום כולל בדיקת המצב התכנוני של נכס, ליווי בהליכים מול הוועדות המקומיות והמחוזיות, ובחינת ההשלכות המשפטיות של חריגות בנייה או שימושים שאינם תואמים את ההיתר.",
+        ],
+      },
+      {
+        heading: "הקשר לעסקאות מקרקעין",
+        paragraphs: [
+          "סוגיות תכנון ובנייה נוגעות לעיתים קרובות בעסקאות מקרקעין — למשל כשרכישת נכס תלויה בזכויות בנייה עתידיות, או כשיש צורך להסדיר חריגה לפני מכירה. בירור המצב התכנוני מראש מסייע לצדדים לקבל החלטה מושכלת.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
+    topics: [
+      "בדיקת המצב התכנוני של נכס",
+      "ליווי מול ועדות תכנון ובנייה",
+      "בחינת חריגות בנייה",
+      "זכויות בנייה במסגרת עסקת מקרקעין",
+    ],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult:
+      "מומלץ לפנות לפני רכישה או מכירה של נכס שקיימת בו אי־בהירות תכנונית, וכן בכל הליך מול ועדות התכנון והבנייה.",
+    relatedSlugs: ["real-estate", "israel-land-authority", "nachalot"],
+  },
+  "cooperative-societies": {
+    slug: "cooperative-societies",
+    title: "אגודות שיתופיות",
+    metaTitle: "אגודות שיתופיות – ייעוץ משפטי | נטע בן חמו",
+    metaDescription:
+      "ייעוץ וליווי משפטי בנושאי אגודות שיתופיות, זכויות חברים, מחלוקות וסוגיות במרחב הכפרי.",
+    intro:
+      "אגודות שיתופיות, ובהן מושבים וקיבוצים, מתנהלות לפי דין ייחודי המשלב בין דיני עמותות, תקנון האגודה והחלטות מוסדותיה. זכויות החברים וההתנהלות מול האגודה הן חלק מרכזי מהחיים במרחב הכפרי.",
+    sections: [
+      {
+        heading: "זכויות חברים והתנהלות מול האגודה",
+        paragraphs: [
+          "חברות באגודה שיתופית כרוכה בזכויות ובחובות הקבועות בתקנון האגודה ובהחלטות מוסדותיה — ועדת קבלה, אסיפה כללית וועד ההנהלה. מחלוקות עשויות להתעורר סביב קבלה לאגודה, הקצאת משאבים, או פרשנות התקנון.",
+          "ליווי משפטי בתחום כולל בחינת מעמד הזכויות מול האגודה, ליווי בפניות ובהחלטות מוסדותיה, וטיפול במחלוקות בין חבר לאגודה או בין חברים לבין עצמם.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
+    topics: [
+      "זכויות וחובות חברי אגודה",
+      "פניות והחלטות מוסדות האגודה",
+      "מחלוקות בין חבר לאגודה",
+      "סוגיות משיקות לנחלות ולמשקים במסגרת האגודה",
+    ],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult:
+      "מומלץ לפנות כשמתעוררת מחלוקת מול האגודה השיתופית, וכן בכל שאלה הנוגעת לפרשנות התקנון או להחלטות מוסדות האגודה.",
+    relatedSlugs: ["nachalot", "israel-land-authority", "financial-disputes"],
   },
   "wills-inheritance": {
     slug: "wills-inheritance",
     title: "צוואות וירושות",
-    metaTitle: 'צוואות וירושות | עו"ד נטע בן חמו',
-    metaDescription: "עריכת צוואות וליווי משפטי בהליכי ירושה.",
+    metaTitle: "עורך דין צוואות וירושות | נטע בן חמו",
+    metaDescription:
+      "עריכת צוואות, טיפול בענייני ירושה וליווי משפטי בהליכים ובמחלוקות בתחום הצוואות והירושות.",
     intro:
       "עריכת צוואות וליווי בהליכי ירושה, מתוך תשומת לב לנסיבות המשפחתיות והרצון להותיר סדר וּודאות.",
+    sections: [
+      {
+        heading: "עריכת צוואה",
+        paragraphs: [
+          "צוואה ברורה וערוכה כראוי היא הדרך הטובה ביותר להבטיח שהרצון האישי יכובד, ולצמצם מראש מחלוקות אפשריות בין היורשים. עריכת הצוואה כוללת בחינת הנסיבות המשפחתיות והרכושיות, וניסוח מדויק שעומד בדרישות החוק.",
+        ],
+      },
+      {
+        heading: "הליכי ירושה וצו קיום צוואה",
+        paragraphs: [
+          "כשנפטר אדם, יש צורך בהוצאת צו קיום צוואה (אם השאיר צוואה) או צו ירושה (אם לא). ליווי בהליך כולל הגשת הבקשה לרשם לענייני ירושה, טיפול בהתנגדויות אם מוגשות, וסיוע בהסכמות בין היורשים כשמדובר בירושה מורכבת.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
     topics: ["עריכת צוואה", "ליווי בהליכי ירושה וצו קיום צוואה", "ירושה על פי דין", "הסכמות בין יורשים"],
     whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
     whenToConsult: "מומלץ לפנות הן בשלב עריכת הצוואה מראש, והן בכל שלב בהליך הירושה עצמו.",
+    relatedSlugs: ["lasting-power-of-attorney", "nachalot", "mediation"],
   },
   "lasting-power-of-attorney": {
     slug: "lasting-power-of-attorney",
     title: "ייפוי כוח מתמשך",
     metaTitle: 'ייפוי כוח מתמשך | עו"ד נטע בן חמו',
-    metaDescription: "הסדרת ייפוי כוח מתמשך לניהול ענייני אדם בעתיד.",
+    metaDescription:
+      "עריכת ייפוי כוח מתמשך וליווי בתהליך המאפשר לתכנן מראש מי יקבל החלטות בענייניו של אדם בעת הצורך.",
     intro:
       "ליווי בהסדרת ייפוי כוח מתמשך – כלי משפטי המאפשר לקבוע מראש מי ינהל את ענייניכם האישיים, הרכושיים והרפואיים, אם וכאשר יהיה בכך צורך.",
+    sections: [
+      {
+        heading: "מה זה ייפוי כוח מתמשך",
+        paragraphs: [
+          "ייפוי כוח מתמשך מאפשר לאדם, בעודו צלול ומסוגל לקבל החלטות, לקבוע מראש מי יהיה מיופה הכוח שינהל את ענייניו אם בעתיד לא יוכל לעשות זאת בעצמו — בלי צורך במינוי אפוטרופוס על ידי בית המשפט.",
+          "המסמך יכול להתייחס לענייני רכוש, לענייני אישיים (כמו מקום מגורים ואורח חיים) ולענייני בריאות, וניתן להתאים אותו להנחיות ולרצונות האישיים של עורך המסמך.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
     topics: [
       "עריכת ייפוי כוח מתמשך",
       "מינוי מיופה כוח לענייני רכוש ואישיים",
@@ -211,30 +410,83 @@ export const servicePages: Record<string, ServicePageContent> = {
     whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
     whenToConsult:
       "ניתן וכדאי להסדיר ייפוי כוח מתמשך מתוך בחירה, בעת שאדם צלול ומסוגל לקבל החלטות בעצמו.",
+    relatedSlugs: ["wills-inheritance", "mediation", "financial-disputes"],
   },
-  "real-estate": {
-    slug: "real-estate",
-    title: "עסקאות מקרקעין",
-    metaTitle: 'עסקאות מקרקעין | עו"ד נטע בן חמו',
-    metaDescription: "ליווי משפטי בעסקאות מכר, רכישה והסכמים במקרקעין.",
+  "financial-disputes": {
+    slug: "financial-disputes",
+    title: "סכסוכים כספיים",
+    metaTitle: "סכסוכים כספיים וליטיגציה אזרחית | נטע בן חמו",
+    metaDescription:
+      "ייצוג וליווי משפטי בסכסוכים כספיים ומחלוקות אזרחיות, תוך בחינת האפשרויות המשפטיות והאסטרטגיה המתאימה.",
     intro:
-      "ליווי משפטי בעסקאות מכר, רכישה והסכמים במקרקעין פרטיים ומסחריים, משלב המשא ומתן ועד לרישום הזכויות.",
+      "לא כל מחלוקת כספית מחייבת הליך משפטי ממושך, אך כשמתעורר סכסוך חשוב לבחון את הזכויות והאפשרויות המשפטיות בצורה מדויקת, ומוקדם ככל האפשר.",
+    sections: [
+      {
+        heading: "ייצוג בסכסוכים כספיים ואזרחיים",
+        paragraphs: [
+          "סכסוכים כספיים יכולים לנבוע מהסכמים שלא קוימו, חובות בין צדדים, שותפויות שהסתיימו במחלוקת, או מחלוקות אזרחיות אחרות. בכל מקרה כזה יש לבחון את העובדות, ההסכמים הקיימים והזכויות המשפטיות של הצדדים.",
+          "ליווי משפטי בתחום כולל בחינת האפשרויות העומדות לצד הנפגע, גיבוש אסטרטגיה מתאימה — משא ומתן, גישור או הליך משפטי — וייצוג לאורך הדרך.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
     topics: [
-      "בדיקת מצב משפטי של הנכס",
-      "עריכת הסכמי מכר ורכישה",
-      "ליווי מול הרשויות והרישום",
-      "עסקאות בין קרובים ובין צדדים שלישיים",
+      "סכסוכים כספיים בין צדדים פרטיים",
+      "מחלוקות בעקבות הסכמים או שותפויות",
+      "בחינת האסטרטגיה המשפטית המתאימה",
+      "ייצוג בהליכי ליטיגציה אזרחית",
     ],
     whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
-    whenToConsult: "מומלץ לפנות לפני חתימה על זיכרון דברים או הסכם, כדי לבחון את הזכויות והתנאים מראש.",
+    whenToConsult:
+      "מומלץ לפנות בשלב מוקדם ככל האפשר של המחלוקת, לפני נקיטת צעדים או הצעת פשרה, כדי לבחון את מלוא האפשרויות העומדות לרשותכם.",
+    relatedSlugs: ["mediation", "cooperative-societies", "wills-inheritance"],
+  },
+  "national-insurance": {
+    slug: "national-insurance",
+    title: "תביעות מול המוסד לביטוח לאומי",
+    metaTitle: "תביעות ביטוח לאומי – ייעוץ וליווי משפטי | נטע בן חמו",
+    metaDescription: "ייעוץ וליווי משפטי בתביעות ובהליכים מול המוסד לביטוח לאומי.",
+    intro:
+      "התנהלות מול המוסד לביטוח לאומי כוללת הליכים ולוחות זמנים ייחודיים, וההחלטות המתקבלות בהם משפיעות באופן ישיר על הזכאות לגמלאות ולתשלומים. ליווי משפטי יכול לסייע בהצגת התביעה בצורה מסודרת ומבוססת.",
+    sections: [
+      {
+        heading: "ליווי בתביעות מול המוסד לביטוח לאומי",
+        paragraphs: [
+          "תביעות מול המוסד לביטוח לאומי עוסקות בסוגיות מגוונות, ובהן קביעת נכות, גמלאות והכרה בזכאות. לכל סוג תביעה הליך, מסמכים ומועדים משלו, ולעיתים יש צורך גם בהגשת ערר על החלטת המוסד.",
+          "ליווי משפטי בתחום כולל בחינת התביעה וההחלטה שהתקבלה, איתור הטעון חיזוק או תיקון, וליווי בהגשת התביעה או הערר מול המוסד.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
+    topics: [
+      "תביעות נכות וגמלאות",
+      "עררים על החלטות המוסד לביטוח לאומי",
+      "בחינת זכאות והכרה בתביעה",
+      "ליווי בהליכים מול המוסד",
+    ],
+    whenToConsultTitle: "מתי כדאי לפנות לייעוץ",
+    whenToConsult:
+      "מומלץ לפנות מיד עם קבלת החלטת המוסד לביטוח לאומי, שכן להגשת ערר יש לרוב מועד מוגבל, וכן בכל שלב מוקדם יותר של הגשת התביעה.",
+    relatedSlugs: ["financial-disputes", "wills-inheritance", "mediation"],
   },
   mediation: {
     slug: "mediation",
     title: "גישור ויישוב סכסוכים",
-    metaTitle: 'גישור ויישוב סכסוכים | עו"ד נטע בן חמו',
-    metaDescription: "ליווי ביישוב סכסוכים בדרך של דיאלוג והקשבה, מתוך שמירה על זכויות וכבוד הצדדים.",
+    metaTitle: "מגשרת מוסמכת – גישור ויישוב סכסוכים | נטע בן חמו",
+    metaDescription:
+      "גישור ויישוב סכסוכים בדרך מקצועית וממוקדת, תוך בחינת האינטרסים והאפשרויות של הצדדים.",
     intro:
       "לא כל מחלוקת חייבת להסתיים בהתדיינות משפטית ממושכת. ליווי ביישוב סכסוכים מתוך הקשבה לשני הצדדים, תוך שמירה על זכויותיהם וכבודם, ובחתירה לפתרון שניתן לחיות איתו.",
+    sections: [
+      {
+        heading: "גישור כדרך ליישוב סכסוך",
+        paragraphs: [
+          "גישור הוא הליך מובנה שבו מגשר ניטרלי מסייע לצדדים למחלוקת להגיע להסכמה בעצמם, מבלי לכפות עליהם פתרון. ההליך גמיש, חסוי, ולרוב מהיר וזול משמעותית מהתדיינות בבית המשפט.",
+          "ליווי בהליך גישור כולל הכנה לקראת המפגשים, ליווי במהלכם, ובחינת ההצעות וההסכמות המתגבשות מנקודת המבט של הצד המיוצג.",
+        ],
+      },
+    ],
+    topicsHeading: "בין הסוגיות בהן ניתן ליווי",
     topics: [
       "גישור בסכסוכי משפחה ומקרקעין",
       "גישור בסכסוכים בין שותפים ובני משפחה",
@@ -244,6 +496,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     whenToConsultTitle: "מתי כדאי לשקול גישור",
     whenToConsult:
       "גישור יכול להתאים כאשר לצדדים יש עניין משותף בהמשך מערכת היחסים, או כאשר מבקשים להגיע לפתרון מהיר, מכבד ופחות עימותי מהליך משפטי רגיל.",
+    relatedSlugs: ["financial-disputes", "wills-inheritance", "cooperative-societies"],
   },
 };
 
@@ -251,13 +504,19 @@ export const servicePages: Record<string, ServicePageContent> = {
 export const homeMeta: PageMeta = {
   title: "נטע בן חמו | עורכת דין – מקרקעין, נחלות, ירושות וגישור",
   description:
-    "עו\"ד נטע בן חמו מעניקה ייעוץ וליווי משפטי בתחומי המקרקעין, נחלות ומשקים, צוואות וירושות, ייפוי כוח מתמשך, גישור וסכסוכים אזרחיים.",
+    "עו\"ד נטע בן חמו מעניקה ייעוץ וליווי משפטי בתחומי המקרקעין, נחלות ומשקים במושבים, צוואות וירושות, ייפוי כוח מתמשך, גישור וסכסוכים אזרחיים.",
 };
+
+// The homepage's visible H1 (see HeroSection.tsx). Kept separate from the
+// stylized hero headline ("אנשים ואדמה") so the page's single <h1> is her
+// name and title exactly, per the client's explicit SEO instruction, while
+// the large hero headline stays a styled paragraph beneath it.
+export const homeH1 = siteMeta.lawyerFullName;
 
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (draft marketing copy, per the
 // client brief's own note that these texts "should remain easy to change")
 export const hero = {
-  eyebrow: "עו״ד נטע בן חמו | מקרקעין, נחלות וגישור",
+  eyebrow: homeH1,
   titleLines: ["אנשים ואדמה."],
   subtitle: "ליווי משפטי מקצועי ואישי בסוגיות מקרקעין, נחלות, ירושה, תכנון משפחתי ויישוב סכסוכים.",
   primaryCta: { label: "לתיאום שיחה", href: "/contact" },
@@ -274,11 +533,10 @@ export const practiceAreasHomeTeaser = {
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
 export const practiceAreasPage = {
   metaTitle: 'תחומי עיסוק | עו"ד נטע בן חמו',
-  metaDescription: "סקירת תחומי העיסוק של המשרד: נחלות, ירושה, ייפוי כוח מתמשך, מקרקעין וגישור.",
+  metaDescription: "סקירת תחומי העיסוק של המשרד: נחלות, מקרקעין, ירושה, ייפוי כוח מתמשך, סכסוכים כספיים וגישור.",
   heading: "תחומי עיסוק",
   intro: "ליווי משפטי בעולם המקרקעין, הנחלות, הירושה וניהול הסכסוכים.",
   itemLinkLabel: "קרא עוד",
-  additionalHeading: "תחומים נוספים",
 };
 
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL
@@ -307,7 +565,11 @@ export const contactCallout = {
 // this time). Nothing here invents experience, awards, cases, success
 // rates, client names, or memberships beyond what was supplied. Experience
 // is stated only as "הוסמכה כעורכת דין בשנת 2012" — not as a number of
-// years — per the client's explicit instruction.
+// years — per the client's explicit instruction. `experienceLinks` maps
+// exact substrings of the last highlight to their service pages, so the
+// bio can link naturally to /practice-areas pages without altering the
+// dictated wording itself (see AboutPage, which renders highlights through
+// linkifyPracticeAreas()).
 export const aboutPage = {
   metaTitle: 'אודות | עו"ד נטע בן חמו',
   metaDescription: 'היכרות עם עו"ד נטע בן חמו — רקע אישי ומקצועי.',
@@ -323,6 +585,19 @@ export const aboutPage = {
   ],
   cta: { label: "יצירת קשר", href: "/contact" },
 };
+
+// Substrings of aboutPage.highlights linked to their service pages. Matched
+// exactly against the (unaltered) highlight text — see linkifyPracticeAreas
+// in AboutPage. Ordered longest-first so a longer phrase is matched before a
+// shorter one it contains.
+export const aboutExperienceLinks: { phrase: string; href: string }[] = [
+  { phrase: "תביעות מול המוסד לביטוח לאומי", href: practiceAreaHref("national-insurance") },
+  { phrase: "אגודות שיתופיות", href: practiceAreaHref("cooperative-societies") },
+  { phrase: "סכסוכים כספיים", href: practiceAreaHref("financial-disputes") },
+  { phrase: "צוואות וירושות", href: practiceAreaHref("wills-inheritance") },
+  { phrase: "ייפוי כוח מתמשך", href: practiceAreaHref("lasting-power-of-attorney") },
+  { phrase: "מקרקעין", href: practiceAreaHref("real-estate") },
+];
 
 // CONFIRMED — matches the five main practice areas.
 export const contactFieldsOfInterest = [

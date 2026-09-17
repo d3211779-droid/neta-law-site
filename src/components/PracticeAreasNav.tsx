@@ -78,7 +78,7 @@ export default function PracticeAreasNav({ label }: { label: string }) {
       {isOpen && (
         <div
           id="practice-areas-menu"
-          className="absolute end-0 top-full mt-3 w-64 border border-border/15 bg-surface py-2 text-foreground shadow-none"
+          className="absolute end-0 top-full mt-3 max-h-[70vh] w-64 overflow-y-auto border border-border/15 bg-surface py-2 text-foreground shadow-none"
         >
           {practiceAreas.map((area, index) => (
             <Link

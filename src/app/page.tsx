@@ -23,16 +23,34 @@ import { PracticeAreasHomeTeaser } from "@/components/PracticeAreas";
 import AboutSection from "@/components/AboutSection";
 import BrandStatement from "@/components/BrandStatement";
 import ContactCallout from "@/components/ContactCallout";
+import { contactDetails, homeMeta, siteMeta } from "@/data/site-content";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
+export const metadata: Metadata = buildMetadata(homeMeta.title, homeMeta.description, "/");
+
+// Real business information only — no invented ratings, reviews, or claims.
+const legalServiceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  name: siteMeta.wordmark,
+  url: `${siteMeta.siteUrl}/`,
+  telephone: "+972-50-7239180",
+  email: contactDetails.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: contactDetails.address,
+    postalCode: contactDetails.postalCode,
+    addressCountry: "IL",
   },
 };
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(legalServiceJsonLd) }}
+      />
       <HeroSection />
       <PracticeAreasHomeTeaser />
       <AboutSection />
