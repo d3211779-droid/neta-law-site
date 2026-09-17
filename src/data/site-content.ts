@@ -502,7 +502,7 @@ export const servicePages: Record<string, ServicePageContent> = {
 
 // CONFIRMED — title and description dictated verbatim by the client for SEO.
 export const homeMeta: PageMeta = {
-  title: "נטע בן חמו | עורכת דין – מקרקעין, נחלות, ירושות וגישור",
+  title: "עו\"ד נטע בן חמו | עורכת דין – מקרקעין, נחלות, ירושות וגישור",
   description:
     "עו\"ד נטע בן חמו מעניקה ייעוץ וליווי משפטי בתחומי המקרקעין, נחלות ומשקים במושבים, צוואות וירושות, ייפוי כוח מתמשך, גישור וסכסוכים אזרחיים.",
 };
