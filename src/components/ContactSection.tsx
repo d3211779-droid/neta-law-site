@@ -6,8 +6,10 @@ import { contactDetails, contactFieldsOfInterest, contactPage } from "@/data/sit
 import { MailIcon, PhoneIcon } from "@/components/icons";
 import { submitContactForm, type ContactFormState } from "@/app/contact/actions";
 
+// text-base (16px) is explicit, not just inherited — iOS Safari auto-zooms
+// on focus for any input under 16px, so this must never resolve smaller.
 const fieldClasses =
-  "w-full border-0 border-b border-dark-section-foreground/30 bg-transparent px-0 py-2.5 text-dark-section-foreground placeholder:text-dark-section-foreground/40 focus:border-accent focus:outline-none focus:ring-0";
+  "w-full max-w-full box-border border-0 border-b border-dark-section-foreground/30 bg-transparent px-0 py-2.5 text-base text-dark-section-foreground placeholder:text-dark-section-foreground/40 focus:border-accent focus:outline-none focus:ring-0";
 
 const initialState: ContactFormState = { status: "idle" };
 
@@ -30,8 +32,11 @@ export default function ContactSection() {
   const [state, formAction] = useActionState(submitContactForm, initialState);
 
   return (
-    <section className="bg-dark-section text-dark-section-foreground">
-      <div className="mx-auto flex max-w-6xl flex-col gap-14 px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:flex-row lg:gap-16 lg:pt-40">
+    <section className="overflow-x-hidden bg-dark-section text-dark-section-foreground">
+      {/* Bottom padding on mobile clears the fixed accessibility button
+          (h-14, bottom-4 + safe-area — see AccessibilityWidget.tsx) so it
+          never sits on top of the submit button at the end of the page. */}
+      <div className="mx-auto flex max-w-6xl flex-col gap-14 px-5 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-32 sm:px-6 sm:pb-28 lg:flex-row lg:gap-16 lg:pt-40">
         <div className="lg:w-5/12">
           <h1 className="max-w-sm font-[family-name:var(--font-heading)] text-3xl font-semibold sm:text-4xl">
             {contactPage.title}
@@ -64,8 +69,10 @@ export default function ContactSection() {
           <form action={formAction} aria-label="טופס יצירת קשר" className="max-w-lg">
             {/* Honeypot — invisible to sighted users and to screen readers
                 (aria-hidden + removed from tab order), so only an automated
-                filler will ever populate it. A human never encounters it. */}
-            <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                filler will ever populate it. A human never encounters it.
+                Clipped in place (not pushed off-screen) so it can never
+                widen the page's scrollable area on mobile. */}
+            <div aria-hidden="true" className="sr-only">
               <label htmlFor="company">אל תמלאו שדה זה</label>
               <input type="text" id="company" name="company" tabIndex={-1} autoComplete="off" />
             </div>
