@@ -1,8 +1,8 @@
-// Temporary site-wide maintenance mode. Flip this single flag to `false`
-// (or delete src/proxy.ts) to instantly restore the full public site — no
+// Temporary site-wide maintenance mode. Flip this single flag back to
+// `true` to instantly take the public site down again (see proxy.ts) — no
 // other code, content, routes, sitemap, robots, or Resend wiring is touched
 // by this feature at all.
-export const MAINTENANCE_MODE = true;
+export const MAINTENANCE_MODE = false;
 
 const CONTACT_PHONE = "050-7239180";
 const CONTACT_PHONE_HREF = "0507239180";
