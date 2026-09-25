@@ -73,11 +73,12 @@ export const siteMeta = {
 // logo.png (replaces the original logo.jpeg) is a true RGBA PNG with real
 // alpha transparency — confirmed by decoding it (all four corners sample at
 // alpha 0), not just its extension. No mix-blend-mode is needed for it.
-// heroVideo: the file stays on disk but is currently unused — the Hero was
-// switched back to the static portrait (see HeroSection.tsx) so the client
-// could get sharper, higher-resolution quality than the 1024x576 source
-// video allowed. The field is kept so the video can be reintroduced without
-// re-uploading anything.
+// heroVideo: live background video in HeroSection.tsx. Replaced 2026-09-25
+// with a 3840x2160 HEVC (hvc1) source — a major upscale-sharpness fix over
+// the original 1024x576 file, but HEVC playback isn't universal (notably
+// Firefox, and most non-Apple Chrome/Edge without a hardware HEVC decoder);
+// unsupported browsers simply won't play the <source>, falling back to the
+// static SVG background already rendered underneath it.
 // portrait is used on /about and, as of this pass, the Hero as well.
 export const media = {
   logo: {
