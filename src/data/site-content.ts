@@ -630,6 +630,7 @@ export const footerLinks: FooterLink[] = [
   { label: "תחומי עיסוק", href: "/practice-areas" },
   { label: "יצירת קשר", href: "/contact" },
   { label: "הצהרת נגישות", href: "/accessibility" },
+  { label: "מדיניות פרטיות", href: "/privacy" },
 ];
 
 // Dictated verbatim — not a placeholder.
@@ -668,4 +669,48 @@ export const accessibilityPage = {
   contactName: "נטע בן חמו, עורכת דין",
   addressTitle: "כתובת המשרד:",
   lastUpdated: "תאריך עדכון אחרון של הצהרת הנגישות: ספטמבר 2026",
+};
+
+// Describes the contact form and its real processors (Vercel + Resend)
+// factually — no legal claims beyond what the site actually does. Nothing
+// here should be presented as legal advice.
+export const privacyPage = {
+  metaTitle: 'מדיניות פרטיות | עו"ד נטע בן חמו',
+  metaDescription:
+    "מדיניות הפרטיות של אתר משרד עורכת הדין נטע בן חמו — אילו פרטים נאספים בטופס יצירת הקשר וכיצד נעשה בהם שימוש.",
+  heading: "מדיניות פרטיות",
+  intro:
+    'משרד עורכת הדין נטע בן חמו מכבד את פרטיות המשתמשים באתר. מדיניות זו מסבירה אילו פרטים נאספים בעת שימוש בטופס יצירת הקשר, לשם מה הם משמשים, ועם מי הם עשויים להיות משותפים.',
+  sections: [
+    {
+      heading: "אילו פרטים נאספים",
+      paragraph:
+        'בטופס יצירת הקשר באתר ניתן למסור את הפרטים הבאים: שם מלא, מספר טלפון, כתובת דוא"ל, נושא הפנייה ותוכן ההודעה. מסירת הפרטים נעשית מרצונו החופשי של המשתמש, לצורך יצירת קשר וטיפול בפנייתו בלבד.',
+    },
+    {
+      heading: "כיצד נעשה שימוש בפרטים",
+      paragraph:
+        "הפרטים שנמסרים בטופס משמשים אך ורק לצורך מענה לפנייה וניהול קשר עם הפונה. האתר אינו מוכר את פרטי המשתמשים לצדדים שלישיים, ואינו עושה בהם שימוש למטרות שיווקיות.",
+    },
+    {
+      heading: "העברת מידע לספקי תשתית ושירות",
+      paragraph:
+        'לצורך תפעול האתר ושליחת פניות מטופס יצירת הקשר, המידע עשוי לעבור דרך ספקי תשתית ושירות חיצוניים, ובהם Vercel (אחסון והפעלת האתר) ו-Resend (שליחת הודעות דוא"ל). ספקים אלה מעבדים את המידע לצורך מתן השירות בלבד.',
+    },
+    {
+      heading: "שמירת המידע",
+      paragraph:
+        "המידע הנמסר בטופס אינו נשמר כרגע במסד נתונים ייעודי של האתר, אלא מועבר ישירות לצורך שליחת הפנייה למשרד.",
+    },
+  ],
+  contactTitle: "פנייה בנושא פרטיות",
+  contactText: "בכל שאלה או בקשה בנושא פרטיות ניתן לפנות למשרד:",
+  lastUpdated: "תאריך עדכון אחרון של מדיניות הפרטיות: ספטמבר 2026",
+};
+
+// The exact consent checkbox copy for the contact form (see ContactSection).
+export const privacyConsent = {
+  label: 'קראתי את מדיניות הפרטיות ואני מסכים/ה למסירת הפרטים לצורך טיפול בפנייתי.',
+  linkText: "מדיניות הפרטיות",
+  href: "/privacy",
 };

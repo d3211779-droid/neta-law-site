@@ -32,8 +32,16 @@ export async function submitContactForm(
   const email = textValue(formData, "email");
   const subject = textValue(formData, "subject");
   const message = textValue(formData, "message");
+  const consent = formData.get("consent");
 
   if (!name || !phone || !message) {
+    return { status: "error" };
+  }
+
+  // Checkboxes are only present in FormData when checked. The `required`
+  // attribute already blocks this client-side; this is the server-side
+  // backstop for a submission that reaches here without it.
+  if (consent !== "on") {
     return { status: "error" };
   }
 

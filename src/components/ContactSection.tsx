@@ -2,9 +2,14 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { contactDetails, contactFieldsOfInterest, contactPage } from "@/data/site-content";
+import Link from "next/link";
+import { contactDetails, contactFieldsOfInterest, contactPage, privacyConsent } from "@/data/site-content";
 import { MailIcon, PhoneIcon } from "@/components/icons";
 import { submitContactForm, type ContactFormState } from "@/app/contact/actions";
+
+// Splits the exact dictated consent copy around "מדיניות הפרטיות" so that
+// phrase can be replaced with a real link without retyping the sentence.
+const [consentTextBefore, consentTextAfter] = privacyConsent.label.split(privacyConsent.linkText);
 
 // text-base (16px) is explicit, not just inherited — iOS Safari auto-zooms
 // on focus for any input under 16px, so this must never resolve smaller.
@@ -133,6 +138,27 @@ export default function ContactSection() {
                   className={`${fieldClasses} mt-1.5 resize-y`}
                 />
               </div>
+            </div>
+
+            <div className="mt-6 flex items-start gap-3">
+              <input
+                id="consent"
+                name="consent"
+                type="checkbox"
+                required
+                aria-required="true"
+                className="mt-1 h-5 w-5 shrink-0 border border-dark-section-foreground/40 bg-transparent accent-accent"
+              />
+              <label htmlFor="consent" className="text-base leading-relaxed text-dark-section-foreground/80">
+                {consentTextBefore}
+                <Link
+                  href={privacyConsent.href}
+                  className="underline decoration-1 underline-offset-2 hover:text-accent-secondary"
+                >
+                  {privacyConsent.linkText}
+                </Link>
+                {consentTextAfter}
+              </label>
             </div>
 
             <p className="mt-6 text-base leading-relaxed text-dark-section-foreground/70">

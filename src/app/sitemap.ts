@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/practice-areas`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE_URL}/contact`, changeFrequency: "yearly", priority: 0.7 },
     { url: `${BASE_URL}/accessibility`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const practiceAreaRoutes: MetadataRoute.Sitemap = practiceAreas.map((area) => ({
