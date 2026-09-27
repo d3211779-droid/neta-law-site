@@ -89,7 +89,9 @@ function PracticeAreaCard({ area, delayMs }: { area: PracticeArea; delayMs: numb
           <p className="line-clamp-3 flex-1 text-base leading-relaxed text-muted-foreground">
             {area.shortDescription}
           </p>
-          <span className="mt-1 inline-flex items-center gap-2 text-base font-semibold text-accent-secondary">
+          {/* text-accent (not accent-secondary/bronze) — bronze-on-cream fails
+              WCAG AA for text at 2.9:1; accent (olive) passes at 7.2:1. */}
+          <span className="mt-1 inline-flex items-center gap-2 text-base font-semibold text-accent">
             {practiceAreasPage.itemLinkLabel}
             <span className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
               ←

@@ -108,9 +108,11 @@ export default function ServicePageTemplate({ content }: { content: ServicePageC
             <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
               {relatedAreas.map((area) => (
                 <li key={area.slug}>
+                  {/* text-accent (not accent-secondary/bronze) — bronze-on-cream
+                      fails WCAG AA for text at 2.9:1; accent (olive) passes at 7.2:1. */}
                   <Link
                     href={practiceAreaHref(area.slug)}
-                    className="text-base font-medium text-accent-secondary underline decoration-border decoration-1 underline-offset-4 transition-colors hover:decoration-accent"
+                    className="text-base font-medium text-accent underline decoration-border decoration-1 underline-offset-4 transition-colors hover:decoration-accent"
                   >
                     {area.title}
                   </Link>

@@ -12,7 +12,12 @@
   --palette-muted: #6b6459;
   --palette-bronze: #a78962;
   --palette-stone: #cbbfa9;
-  --palette-charcoal-olive: #172019;
+  /* Unified with --palette-foreground (was #172019, an 8-unit-RGB difference
+     imperceptible on screen) per the color audit — same value, one fewer
+     near-duplicate token. Never rendered adjacent to foreground, so nothing
+     visually changes: this is a background fill (dark-section) everywhere,
+     foreground is only ever a text color on light backgrounds. */
+  --palette-charcoal-olive: #1e2419;
   --palette-white: #ffffff;
 
   /* Semantic tokens — the only layer components reference. */
@@ -183,15 +188,20 @@ body {
   }
 }
 
-/* Subtle right-anchored tint for text legibility over the video. Transparent
-   across most of the frame; only the right edge (where the Hero content
-   sits) picks up a soft darkening. Deliberately not a full-frame overlay. */
+/* Right-anchored tint for text legibility over the video. Still transparent
+   across most of the frame (fully clear past 65%) — only the zone where the
+   Hero content actually sits picks up darkening, strengthened (55%→70% peak,
+   plus a smoother 3-stop falloff) per the color-contrast audit: against a
+   bright frame (open sky/field — the video's own right-side framing), the
+   previous 55% peak left small Hero text as low as ~2.5:1. Not a full-frame
+   overlay — most of the video is still untouched. */
 .hero-video-overlay {
   background: linear-gradient(
     to left,
-    color-mix(in srgb, var(--dark-section) 55%, transparent) 0%,
-    color-mix(in srgb, var(--dark-section) 25%, transparent) 30%,
-    transparent 60%
+    color-mix(in srgb, var(--dark-section) 70%, transparent) 0%,
+    color-mix(in srgb, var(--dark-section) 50%, transparent) 25%,
+    color-mix(in srgb, var(--dark-section) 20%, transparent) 50%,
+    transparent 65%
   );
 }
 
