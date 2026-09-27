@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   practiceAreaBySlug,
@@ -9,6 +10,7 @@ import {
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function ServicePageTemplate({ content }: { content: ServicePageContent }) {
+  const area = practiceAreaBySlug(content.slug);
   const breadcrumbItems = [
     { label: "ראשי", href: "/" },
     { label: "תחומי עיסוק", href: "/practice-areas" },
@@ -38,6 +40,19 @@ export default function ServicePageTemplate({ content }: { content: ServicePageC
       />
       <div className="mx-auto max-w-3xl px-4 pb-16 pt-32 sm:px-6 sm:pb-24 lg:pt-40">
         <Breadcrumbs items={breadcrumbItems} />
+
+        {area && (
+          <div className="relative mt-6 aspect-[4/3] w-full overflow-hidden bg-surface-muted/45">
+            <Image
+              src={area.image.src}
+              alt={area.image.alt}
+              fill
+              sizes="(min-width: 640px) 48rem, 100vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
 
         <h1 className="mt-6 font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
           {content.title}

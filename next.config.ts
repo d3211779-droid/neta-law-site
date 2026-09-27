@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
     // HeroSection.tsx, per an explicit client request for maximum sharpness
     // on large screens); 75 stays available as next/image's own default.
     qualities: [75, 90, 100],
+    // Default is ["image/webp"] only; adding avif so next/image's optimizer
+    // serves it to browsers that support it (falls back to webp, then the
+    // original format) — used for the practice-area photos.
+    formats: ["image/avif", "image/webp"],
   },
 };
 

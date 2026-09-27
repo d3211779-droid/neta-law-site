@@ -12,12 +12,24 @@ export type NavItem = {
   href: string;
 };
 
+export type PracticeAreaImage = {
+  src: string;
+  alt: string;
+};
+
 export type PracticeArea = {
   slug: string;
   title: string;
   shortDescription: string;
   /** Nachalot gets a touch more visual weight — the firm's central focus. */
   featured?: boolean;
+  /**
+   * Licensed stock photo (Pexels/Unsplash, free-use licenses — see
+   * public/images/practice-areas/README source list). Same image used on
+   * the /practice-areas card and at the top of the area's own page, at the
+   * same 4:3 ratio, so add real, non-invented photography here only.
+   */
+  image: PracticeAreaImage;
 };
 
 export type ServicePageSection = {
@@ -123,51 +135,91 @@ export const practiceAreas: PracticeArea[] = [
     title: "נחלות ומשקים במושבים",
     shortDescription: "זכויות, ירושה, בן ממשיך והעברה בין־דורית בנחלות ובמשקים במושבים.",
     featured: true,
+    image: {
+      src: "/images/practice-areas/nachalot.jpg",
+      alt: "נוף אווירי של שדות חקלאיים ונחלות לצד הכנרת",
+    },
   },
   {
     slug: "real-estate",
     title: 'מקרקעין ועסקאות נדל"ן',
     shortDescription: 'ליווי בעסקאות מכר, רכישה והסכמים במקרקעין ונדל"ן.',
+    image: {
+      src: "/images/practice-areas/real-estate.jpg",
+      alt: "חזית בית ים־תיכוני בגוני שמנת עם גג רעפים",
+    },
   },
   {
     slug: "israel-land-authority",
     title: "רשות מקרקעי ישראל",
     shortDescription: "ליווי מול רשות מקרקעי ישראל בסוגיות זכויות, הקצאות והסדרת מקרקעין.",
+    image: {
+      src: "/images/practice-areas/israel-land-authority.jpg",
+      alt: "גבעות מדורגות בנוף כפרי בשעת שקיעה",
+    },
   },
   {
     slug: "planning-and-building",
     title: "תכנון ובנייה",
     shortDescription: "ליווי משפטי בסוגיות תכנון ובנייה וזכויות בנייה במקרקעין.",
+    image: {
+      src: "/images/practice-areas/planning-and-building.jpg",
+      alt: "מודל אדריכלי מעץ של מבנה מגורים",
+    },
   },
   {
     slug: "cooperative-societies",
     title: "אגודות שיתופיות",
     shortDescription: "זכויות חברים, פניות והחלטות מוסדות מול אגודות שיתופיות.",
+    image: {
+      src: "/images/practice-areas/cooperative-societies.jpg",
+      alt: "נוף אווירי של שדה חיטה מוזהב באזור חקלאי כפרי",
+    },
   },
   {
     slug: "wills-inheritance",
     title: "צוואות וירושות",
     shortDescription: "עריכת צוואות וליווי בהליכי ירושה בין בני משפחה.",
+    image: {
+      src: "/images/practice-areas/wills-inheritance.jpg",
+      alt: "מכתב יד עם חותם שעווה וספרים ישנים",
+    },
   },
   {
     slug: "lasting-power-of-attorney",
     title: "ייפוי כוח מתמשך",
     shortDescription: "הסדרת ייפוי כוח מתמשך לעתיד, מתוך בחירה ומראש.",
+    image: {
+      src: "/images/practice-areas/lasting-power-of-attorney.jpg",
+      alt: "ידיים של אדם מבוגר וצעיר אוחזות זו בזו על שולחן עץ",
+    },
   },
   {
     slug: "financial-disputes",
     title: "סכסוכים כספיים",
     shortDescription: "ייצוג בסכסוכים כספיים ומחלוקות אזרחיות, תוך בחינת האסטרטגיה המתאימה.",
+    image: {
+      src: "/images/practice-areas/financial-disputes.jpg",
+      alt: "מסמך חוזה ועט זהב על שולחן עבודה מעץ",
+    },
   },
   {
     slug: "national-insurance",
     title: "תביעות מול המוסד לביטוח לאומי",
     shortDescription: "ליווי בתביעות ובהליכים מול המוסד לביטוח לאומי.",
+    image: {
+      src: "/images/practice-areas/national-insurance.jpg",
+      alt: "מילוי טופס בכתב יד על שולחן עץ",
+    },
   },
   {
     slug: "mediation",
     title: "גישור ויישוב סכסוכים",
     shortDescription: "יישוב סכסוכים בדרך של דיאלוג, מתוך הקשבה לשני הצדדים.",
+    image: {
+      src: "/images/practice-areas/mediation.jpg",
+      alt: "ענף זית באור שמש חם",
+    },
   },
 ];
 
