@@ -569,9 +569,13 @@ export const homeH1 = siteMeta.lawyerFullName;
 // TEMPORARY CONTENT — REQUIRES CLIENT APPROVAL (draft marketing copy, per the
 // client brief's own note that these texts "should remain easy to change")
 export const hero = {
+  // Name line — prominent, but no longer the <h1> (see HeroSection.tsx):
+  // the brand headline below now carries that role for SEO structure.
   eyebrow: homeH1,
-  titleLines: ["אנשים ואדמה."],
-  subtitle: "מומחיות משפטית לצד ליווי אישי וקשוב – כי מאחורי כל מקרה יש אדם, סיפור וחיים שלמים.",
+  // The Hero's <h1> and sole large headline. "אנשים ואדמה." and the old
+  // separate description line were removed rather than kept alongside it,
+  // per an explicit instruction to avoid duplicating the same message.
+  headline: "מומחיות משפטית לצד ליווי אישי וקשוב – כי מאחורי כל מקרה יש אדם, סיפור וחיים שלמים.",
   primaryCta: { label: "לתיאום שיחה", href: "/contact" },
   secondaryCta: { label: "לתחומי העיסוק", href: "/practice-areas" },
 };

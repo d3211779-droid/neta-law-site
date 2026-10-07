@@ -101,32 +101,26 @@ export default function HeroSection() {
 
       {/* Layer 4 — content: right-aligned (RTL default), vertically centered via the section's own flex layout. */}
       <div className="hero-content relative z-10 flex w-full justify-start px-4 py-16 sm:px-6 sm:py-20 lg:px-12 lg:py-28 xl:px-20">
-        <div className="flex max-w-xs flex-col gap-6 sm:max-w-sm sm:gap-8 md:max-w-md lg:max-w-xl">
-          <h1
-            className="hero-fade-up text-2xl font-semibold tracking-[0.02em] text-dark-section-foreground/90"
+        <div className="flex max-w-xs flex-col gap-5 sm:max-w-sm sm:gap-6 md:max-w-md lg:max-w-xl">
+          {/* Name — prominent identification, not the <h1> (the brand
+              headline below is). Full opacity + bold, clearly bigger than
+              its previous text-2xl/90%/semibold treatment. */}
+          <p
+            className="hero-fade-up text-3xl font-bold text-dark-section-foreground sm:text-4xl"
             style={{ animationDelay: "0ms" }}
           >
             {hero.eyebrow}
-          </h1>
-
-          <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold leading-[1.1] sm:text-4xl md:text-5xl lg:text-[clamp(2.5rem,5vw+1rem,4.5rem)] lg:leading-[1.08]">
-            {hero.titleLines.map((line, index) => (
-              <span
-                key={line}
-                className="hero-fade-up block"
-                style={{ animationDelay: `${120 + index * 110}ms` }}
-              >
-                {line}
-              </span>
-            ))}
           </p>
 
-          <p
-            className="hero-fade-up text-lg font-medium leading-relaxed text-dark-section-foreground sm:text-xl"
-            style={{ animationDelay: "340ms" }}
+          {/* The Hero's single large headline and <h1> — carries the old
+              "אנשים ואדמה" display treatment's role (same heading font),
+              sized for a full sentence rather than two words. */}
+          <h1
+            className="hero-fade-up font-[family-name:var(--font-heading)] text-4xl font-bold leading-snug text-dark-section-foreground sm:text-5xl lg:text-6xl"
+            style={{ animationDelay: "140ms" }}
           >
-            {hero.subtitle}
-          </p>
+            {hero.headline}
+          </h1>
         </div>
       </div>
     </section>
