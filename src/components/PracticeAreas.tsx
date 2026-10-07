@@ -14,7 +14,7 @@ import Reveal from "@/components/Reveal";
 export function PracticeAreasHomeTeaser() {
   return (
     <section className="bg-background">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6 sm:py-24">
         <Reveal>
           <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
             {practiceAreasHomeTeaser.heading}

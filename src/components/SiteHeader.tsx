@@ -41,14 +41,14 @@ export default function SiteHeader() {
           : "border-b border-transparent bg-transparent text-dark-section-foreground"
       }`}
     >
-      <div className="flex w-full items-center justify-between gap-4 px-6 py-5 lg:px-10">
+      <div className="flex w-full items-center justify-between gap-4 px-6 py-4 lg:px-10 lg:py-5">
         <Link href="/" scroll={true} className="shrink-0">
           <Image
             src={media.logo.src}
             alt={media.logo.alt}
             width={107}
             height={96}
-            className="h-[72px] w-auto lg:h-24"
+            className="h-[60px] w-auto lg:h-24"
             quality={90}
             priority
           />
@@ -71,13 +71,15 @@ export default function SiteHeader() {
           )}
         </nav>
 
-        {/* self-start (mobile only) lifts the hamburger to align with the
-            logo's own top edge, instead of sitting centered against the full
-            72px logo height — on narrow phones that centered position was
-            low enough to overlap the Hero video's framing underneath.
+        {/* self-start + -mt-1 (mobile only) lift the hamburger above the
+            header's own top padding so it clears Neta's hair underneath,
+            aligned against the logo area. The button grew from 40px to the
+            48px accessible tap-target size requested, so the extra -mt-1
+            offsets that growth — its bottom edge lands back at the same
+            safe height as the previous, already-confirmed-clear fix.
             Reverts to the original vertical centering at lg:, where this
             holds the "לתיאום שיחה" button instead and nothing changes. */}
-        <div className="flex items-center gap-4 self-start lg:self-auto">
+        <div className="flex items-center gap-4 self-start -mt-1 lg:mt-0 lg:self-auto">
           <Link
             href="/contact"
             className="hidden bg-accent px-5 py-2.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section hover:text-dark-section-foreground lg:inline-flex"
@@ -87,13 +89,13 @@ export default function SiteHeader() {
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center border border-current/25 lg:hidden"
+            className="inline-flex h-12 w-12 shrink-0 items-center justify-center border border-current/25 lg:hidden"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav"
             aria-label={isMenuOpen ? "סגירת תפריט ניווט" : "פתיחת תפריט ניווט"}
             onClick={() => setIsMenuOpen((open) => !open)}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               {isMenuOpen ? (
                 <path d="M3 3L15 15M15 3L3 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               ) : (
