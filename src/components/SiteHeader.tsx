@@ -71,7 +71,13 @@ export default function SiteHeader() {
           )}
         </nav>
 
-        <div className="flex items-center gap-4">
+        {/* self-start (mobile only) lifts the hamburger to align with the
+            logo's own top edge, instead of sitting centered against the full
+            72px logo height — on narrow phones that centered position was
+            low enough to overlap the Hero video's framing underneath.
+            Reverts to the original vertical centering at lg:, where this
+            holds the "לתיאום שיחה" button instead and nothing changes. */}
+        <div className="flex items-center gap-4 self-start lg:self-auto">
           <Link
             href="/contact"
             className="hidden bg-accent px-5 py-2.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section hover:text-dark-section-foreground lg:inline-flex"
@@ -81,7 +87,7 @@ export default function SiteHeader() {
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center border border-current/25 lg:hidden"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center border border-current/25 lg:hidden"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav"
             aria-label={isMenuOpen ? "סגירת תפריט ניווט" : "פתיחת תפריט ניווט"}

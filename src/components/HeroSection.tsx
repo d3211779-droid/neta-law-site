@@ -103,7 +103,7 @@ export default function HeroSection() {
       <div className="hero-content relative z-10 flex w-full justify-start px-4 py-16 sm:px-6 sm:py-20 lg:px-12 lg:py-28 xl:px-20">
         <div className="flex max-w-xs flex-col gap-6 sm:max-w-sm sm:gap-8 md:max-w-md lg:max-w-xl">
           <h1
-            className="hero-fade-up text-base font-medium tracking-[0.04em] text-dark-section-foreground/70"
+            className="hero-fade-up text-2xl font-semibold tracking-[0.02em] text-dark-section-foreground/90"
             style={{ animationDelay: "0ms" }}
           >
             {hero.eyebrow}
@@ -122,7 +122,7 @@ export default function HeroSection() {
           </p>
 
           <p
-            className="hero-fade-up text-base leading-relaxed text-dark-section-foreground/85 sm:text-lg"
+            className="hero-fade-up text-lg font-medium leading-relaxed text-dark-section-foreground sm:text-xl"
             style={{ animationDelay: "340ms" }}
           >
             {hero.subtitle}

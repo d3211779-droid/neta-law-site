@@ -571,7 +571,7 @@ export const homeH1 = siteMeta.lawyerFullName;
 export const hero = {
   eyebrow: homeH1,
   titleLines: ["אנשים ואדמה."],
-  subtitle: "ליווי משפטי מקצועי ואישי בסוגיות מקרקעין, נחלות, ירושה, תכנון משפחתי ויישוב סכסוכים.",
+  subtitle: "מומחיות משפטית לצד ליווי אישי וקשוב – כי מאחורי כל מקרה יש אדם, סיפור וחיים שלמים.",
   primaryCta: { label: "לתיאום שיחה", href: "/contact" },
   secondaryCta: { label: "לתחומי העיסוק", href: "/practice-areas" },
 };
