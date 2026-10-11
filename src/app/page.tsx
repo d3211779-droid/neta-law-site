@@ -20,7 +20,6 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
 import { PracticeAreasHomeTeaser } from "@/components/PracticeAreas";
-import AboutSection from "@/components/AboutSection";
 import BrandStatement from "@/components/BrandStatement";
 import ContactCallout from "@/components/ContactCallout";
 import { contactDetails, homeMeta, siteMeta } from "@/data/site-content";
@@ -53,7 +52,6 @@ export default function Home() {
       />
       <HeroSection />
       <PracticeAreasHomeTeaser />
-      <AboutSection />
       <BrandStatement />
       <ContactCallout />
     </>

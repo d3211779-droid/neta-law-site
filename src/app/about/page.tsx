@@ -70,14 +70,13 @@ export default function AboutPage() {
               {aboutPage.heading}
             </h1>
 
-            <ul className="mt-8 space-y-3">
+            <div className="mt-8 space-y-4">
               {aboutPage.highlights.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-base leading-relaxed text-foreground sm:text-lg">
-                  <span aria-hidden="true" className="mt-3 h-1.5 w-1.5 shrink-0 bg-accent" />
-                  <span>{linkifyPracticeAreas(item)}</span>
-                </li>
+                <p key={item} className="text-base leading-[1.95] text-foreground sm:text-lg">
+                  {linkifyPracticeAreas(item)}
+                </p>
               ))}
-            </ul>
+            </div>
 
             <Link
               href={aboutPage.cta.href}

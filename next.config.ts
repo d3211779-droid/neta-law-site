@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        // Existing links to the discontinued service remain useful.
+        source: "/practice-areas/planning-and-building",
+        destination: "/practice-areas",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Next.js 16 only allows quality 75 unless the values are explicitly
     // allowlisted here. 90 is used for the logo and the About-page portrait

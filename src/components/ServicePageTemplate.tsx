@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   practiceAreaBySlug,
@@ -10,7 +9,6 @@ import {
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function ServicePageTemplate({ content }: { content: ServicePageContent }) {
-  const area = practiceAreaBySlug(content.slug);
   const breadcrumbItems = [
     { label: "ראשי", href: "/" },
     { label: "תחומי עיסוק", href: "/practice-areas" },
@@ -38,105 +36,61 @@ export default function ServicePageTemplate({ content }: { content: ServicePageC
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <div className="mx-auto max-w-3xl px-4 pb-16 pt-32 sm:px-6 sm:pb-24 lg:pt-40">
+      <div className="mx-auto max-w-4xl px-5 pb-16 pt-32 sm:px-8 sm:pb-24 lg:pt-40">
         <Breadcrumbs items={breadcrumbItems} />
 
-        {area && (
-          <div className="relative mt-6 aspect-[4/3] w-full overflow-hidden bg-surface-muted/45">
-            <Image
-              src={area.image.src}
-              alt={area.image.alt}
-              fill
-              sizes="(min-width: 640px) 48rem, 100vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
+        <header className="mt-10 border-b border-border/50 pb-9">
+          <div className="mb-6 h-1 w-16 bg-accent" aria-hidden="true" />
+          <h1 className="max-w-3xl font-[family-name:var(--font-heading)] text-3xl font-semibold leading-snug text-foreground sm:text-4xl lg:text-[2.7rem]">
+            {content.title}
+          </h1>
+        </header>
 
-        <h1 className="mt-6 font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
-          {content.title}
-        </h1>
-
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {content.intro}
-        </p>
+        <div className="mt-9 space-y-5">
+          {content.intro.map((paragraph) => (
+            <p key={paragraph} className="text-[1.075rem] leading-[1.95] text-muted-foreground sm:text-lg">
+              {paragraph}
+            </p>
+          ))}
+        </div>
 
         {content.sections.map((section) => (
-          <div key={section.heading} className="mt-10 border-t border-border/15 pt-8">
-            <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
+          <section key={section.heading} className="mt-12 border-t border-border/35 pt-8 sm:mt-14 sm:pt-10">
+            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold leading-relaxed text-foreground sm:text-[1.7rem]">
               {section.heading}
             </h2>
-            <div className="mt-3 max-w-xl space-y-4">
+            <div className="mt-5 space-y-5">
               {section.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <p key={paragraph} className="text-[1.075rem] leading-[1.95] text-muted-foreground sm:text-lg">
                   {paragraph}
                 </p>
               ))}
             </div>
-          </div>
+          </section>
         ))}
 
-        <div className="mt-10 border-t border-border/15 pt-8">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-            {content.topicsHeading}
-          </h2>
-          <ul className="mt-6 space-y-3">
-            {content.topics.map((topic) => (
-              <li key={topic} className="flex items-start gap-3 text-base leading-relaxed text-foreground sm:text-lg">
-                <span aria-hidden="true" className="mt-3 h-1.5 w-1.5 shrink-0 bg-accent" />
-                {topic}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mt-10 border-t border-border/15 pt-8">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
-            {content.whenToConsultTitle}
-          </h2>
-          <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {content.whenToConsult}
-          </p>
-        </div>
-
         {relatedAreas.length > 0 && (
-          <div className="mt-10 border-t border-border/15 pt-8">
+          <nav aria-label="תחומים קשורים" className="mt-14 border-t border-border/35 pt-8">
             <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
               תחומים קשורים
             </h2>
-            <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
+            <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
               {relatedAreas.map((area) => (
                 <li key={area.slug}>
-                  {/* text-accent (not accent-secondary/bronze) — bronze-on-cream
-                      fails WCAG AA for text at 2.9:1; accent (olive) passes at 7.2:1. */}
-                  <Link
-                    href={practiceAreaHref(area.slug)}
-                    className="text-base font-medium text-accent underline decoration-border decoration-1 underline-offset-4 transition-colors hover:decoration-accent"
-                  >
-                    {area.title}
+                  <Link href={practiceAreaHref(area.slug)} className="font-medium text-accent underline decoration-border underline-offset-4 transition-colors hover:decoration-accent">
+                    {area.homeTitle ?? area.title}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         )}
 
-        <div className="mt-10 flex flex-col gap-6 border-t border-border/15 pt-8">
-          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            יש נושא הקשור ל{content.title} שדורש בחינה משפטית?{" "}
-            <Link href="/contact" className="font-semibold text-foreground underline underline-offset-4">
-              ניתן ליצור קשר
-            </Link>{" "}
-            לתיאום שיחת היכרות ראשונית.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex w-fit items-center justify-center bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section hover:text-dark-section-foreground"
-          >
-            לתיאום שיחה
+        <div className="mt-12 flex flex-col items-start gap-5 border-t border-border/35 pt-8">
+          <Link href="/contact" className="inline-flex items-center justify-center bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground transition-colors hover:bg-dark-section">
+            ליצירת קשר
           </Link>
-          <p className="text-base leading-relaxed text-muted-foreground">{servicePageDisclaimer}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">{servicePageDisclaimer}</p>
         </div>
       </div>
     </article>

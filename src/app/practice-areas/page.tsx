@@ -19,9 +19,6 @@ export default function PracticeAreasPage() {
         <h1 className="mt-6 max-w-xl font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
           {practiceAreasPage.heading}
         </h1>
-        <p className="mt-3 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {practiceAreasPage.intro}
-        </p>
 
         <div className="mt-12">
           <PracticeAreasIndex />

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   practiceAreaHref,
@@ -7,7 +6,6 @@ import {
   practiceAreasHomeTeaser,
   practiceAreasPage,
   type PracticeArea,
-  type PracticeAreaImage,
 } from "@/data/site-content";
 import Reveal from "@/components/Reveal";
 
@@ -19,9 +17,6 @@ export function PracticeAreasHomeTeaser() {
           <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-foreground sm:text-4xl">
             {practiceAreasHomeTeaser.heading}
           </h2>
-          <p className="mt-3 max-w-md text-base leading-relaxed text-muted-foreground">
-            {practiceAreasHomeTeaser.intro}
-          </p>
         </Reveal>
 
         <Reveal delayMs={100}>
@@ -36,7 +31,7 @@ export function PracticeAreasHomeTeaser() {
                       : "text-lg font-medium text-foreground underline decoration-border decoration-1 underline-offset-8 transition-colors hover:decoration-accent"
                   }
                 >
-                  {area.title}
+                  {area.homeTitle ?? area.title}
                 </Link>
               </li>
             ))}
@@ -55,33 +50,13 @@ export function PracticeAreasHomeTeaser() {
   );
 }
 
-// Same photo, same 4:3 ratio used here and at the top of the area's own
-// page (see ServicePageTemplate) — object-cover crops it consistently at
-// every breakpoint, including mobile, without ever upscaling past its
-// natural size.
-function PracticeAreaVisual({ image }: { image: PracticeAreaImage }) {
-  return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-muted/45">
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-        className="object-cover"
-      />
-    </div>
-  );
-}
-
 function PracticeAreaCard({ area, delayMs }: { area: PracticeArea; delayMs: number }) {
   return (
     <Reveal delayMs={delayMs} className="h-full">
       <Link
         href={practiceAreaHref(area.slug)}
-        className="group flex h-full flex-col border border-border/30 bg-surface shadow-[0_1px_3px_rgba(30,36,25,0.08)] transition-shadow hover:shadow-[0_6px_18px_rgba(30,36,25,0.1)]"
+        className="group flex h-full flex-col border border-border/30 bg-surface transition-colors hover:border-accent/50 hover:bg-background"
       >
-        <PracticeAreaVisual image={area.image} />
-
         <div className="flex flex-1 flex-col gap-3 p-6">
           <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground">
             {area.title}
