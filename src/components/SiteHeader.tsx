@@ -146,6 +146,11 @@ export default function SiteHeader() {
               </ul>
             </li>
             <li>
+              <Link href="/articles" className="block py-3 text-base font-medium" onClick={() => setIsMenuOpen(false)}>
+                מאמרים
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="block py-3 text-base font-medium" onClick={() => setIsMenuOpen(false)}>
                 יצירת קשר
               </Link>

@@ -105,6 +105,7 @@ export const nav: NavItem[] = [
   { label: "ראשי", href: "/" },
   { label: "אודות", href: "/about" },
   { label: "תחומי עיסוק", href: "/practice-areas" },
+  { label: "מאמרים", href: "/articles" },
   { label: "יצירת קשר", href: "/contact" },
 ];
 
@@ -247,6 +248,7 @@ export const contactPage = {
 export const footerLinks: FooterLink[] = [
   { label: "אודות", href: "/about" },
   { label: "תחומי עיסוק", href: "/practice-areas" },
+  { label: "מאמרים", href: "/articles" },
   { label: "יצירת קשר", href: "/contact" },
   { label: "הצהרת נגישות", href: "/accessibility" },
   { label: "מדיניות פרטיות", href: "/privacy" },
