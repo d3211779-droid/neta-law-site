@@ -23,6 +23,7 @@ import { PracticeAreasHomeTeaser } from "@/components/PracticeAreas";
 import BrandStatement from "@/components/BrandStatement";
 import ArticlesHomeTeaser from "@/components/ArticlesHomeTeaser";
 import ContactCallout from "@/components/ContactCallout";
+import EntryContactPopup from "@/components/EntryContactPopup";
 import { contactDetails, homeMeta, siteMeta } from "@/data/site-content";
 import { buildMetadata } from "@/lib/seo";
 
@@ -51,6 +52,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(legalServiceJsonLd) }}
       />
+      <EntryContactPopup />
       <HeroSection />
       <PracticeAreasHomeTeaser />
       <ArticlesHomeTeaser />
