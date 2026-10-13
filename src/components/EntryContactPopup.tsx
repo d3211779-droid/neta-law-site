@@ -112,10 +112,10 @@ export default function EntryContactPopup() {
           id="entry-contact-title"
           className="font-[family-name:var(--font-heading)] text-3xl font-semibold leading-snug sm:text-4xl"
         >
-          זקוקים לליווי משפטי?
+          זקוקים לייעוץ משפטי?
         </h2>
         <p id="entry-contact-description" className="mt-5 text-base leading-8 text-muted-foreground">
-          מומחיות משפטית לצד ליווי אישי, אנושיות והקשבה. מוזמנים לפנות אליי דרך טופס יצירת הקשר.
+          מומחיות משפטית לצד ליווי אישי, אנושיות והקשבה. מוזמנים לפנות למשרדי דרך טופס יצירת הקשר.
         </p>
 
         <Link
